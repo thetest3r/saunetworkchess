@@ -1,0 +1,6 @@
+Make sure to comment each revison you commit so we know what has been changed.
+
+--David
+
+
+P.S. Leave any notes you like here.
