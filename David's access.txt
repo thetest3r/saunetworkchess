@@ -1,1 +1,0 @@
-svn+ssh://rnb3k@svn.code.sf.net/p/saunetworkchess/code/
