@@ -8,3 +8,5 @@ P.S. Leave any notes you like here.
 
 
 https://sourceforge.net/p/forge/community-docs/TortoiseSVN/
+
+http://aktzero.com/bytes/subversion-ssh-windows/
