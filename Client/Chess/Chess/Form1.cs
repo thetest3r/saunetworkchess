@@ -5,34 +5,61 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-
+//using System.Windows.Forms.ImageList;
+//http://www.mindstick.com/Articles/73eb92cb-7e33-4de9-bf52-4bf5314f6cda/?Displaying%20an%20array%20of%20images%20in%20pictureBox%20C //Reference this
 namespace Chess
 {
     public partial class Form1 : Form
     {
+        private List<Image> chessPieceList = new List<Image>();
         private TableLayoutPanel cells;
         class Cell : PictureBox
         {
-            public static readonly System.Drawing.Size CellSize = new System.Drawing.Size(50, 50);
+            public static readonly System.Drawing.Size CellSize = new System.Drawing.Size(75, 75);
             public readonly int row, col;
             public Cell(int row, int col)
                 : base()
             {
                 this.row = row; this.col = col;
                 this.Size = CellSize;
-                this.BackColor = (col % 2 == row % 2) ? Color.Black : Color.White;
+                this.BackColor = (col % 2 == row % 2) ? Color.Black : Color.White; 
             }
             public override string ToString() { return "Cell(" + row + "," + col + ")"; }
         }
 
         public Form1()
         {
+            //loadPNG();
+            //ImageList1.ImageSize = new Size(50, 50);
+            //ImageList1.Images.Add(Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\white_pawn.png"));
+            Graphics theGraphics = Graphics.FromHwnd(this.Handle);
+                        loadPNG();
             InitializeComponent();
-            cells = GetBoard();
+            cells = GetBoard(theGraphics);
             this.Controls.Add(cells);
         }
+        private void loadPNG()
+        {
+            string folder_address = "C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content";
+            string [] pieceName = new string[12];
+            //Console.WriteLine("{0}", sizeof
+            pieceName[0] = "\\White_Pawn.png"; pieceName[1] = "\\White_Castle.png"; pieceName[2] = "\\White_Knight.png"; 
+            pieceName[3] = "\\White_Bishop.png"; pieceName[4] = "\\White_Queen.png"; pieceName[5] = "\\White_King.png";
 
-        private TableLayoutPanel GetBoard()
+            pieceName[6] = "\\Black_Pawn.png"; pieceName[7] = "\\Black_Castle.png"; pieceName[8] = "\\Black_Knight.png";
+            pieceName[9] = "\\Black_Bishop.png"; pieceName[10] = "\\Black_Queen.png"; pieceName[11] = "\\Black_King.png";
+            Image temp;
+            string temp_string;
+            for(int i = 0; i<12; i++)
+            {
+            temp_string = (folder_address + pieceName[i]);
+            temp = Image.FromFile(temp_string);
+            chessPieceList.Add(temp);
+            //Console.WriteLine("{0}", temp_string);
+            }
+            
+        }
+        private TableLayoutPanel GetBoard(Graphics theGraphics)
         {
             TableLayoutPanel b = new TableLayoutPanel();
             b.ColumnCount = 8;
@@ -50,6 +77,10 @@ namespace Chess
             }
             b.Padding = new Padding(0);
             b.Size = new System.Drawing.Size(b.ColumnCount * Cell.CellSize.Width, b.RowCount * Cell.CellSize.Height);
+            Graphics white_pawn = Graphics.FromImage(chessPieceList[0]);
+            white_pawn.DrawImage(chessPieceList[0], new Point(0, 0));
+            //ImageList1.Draw(theGraphics, new Point(85, 85), 1);
+            //Application.DoEvents();
             return b;
         }
 
