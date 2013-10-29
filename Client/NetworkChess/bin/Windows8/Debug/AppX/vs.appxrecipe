@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>IVY</Machine>
+    <WindowsUser>TT3 Productions</WindowsUser>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <RegisteredManifestChecksum>EC93B64A180AAC341C7D24E522EC359D9178F34ACA2A2EA57CF55E09171272A6</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>abad63b5-bacc-4cd9-8195-27ce6411f987_1.0.0.0_neutral__3pvxxcffjtrbj</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>abad63b5-bacc-4cd9-8195-27ce6411f987_3pvxxcffjtrbj!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>abad63b5-bacc-4cd9-8195-27ce6411f987</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=TT3 Productions</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\bin\Windows8\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-10-27T15:10:36.430</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\bin\Windows8\Debug\NetworkChess.exe">
+      <PackagePath>NetworkChess.exe</PackagePath>
+      <Modified>2013-10-27T16:04:46.471</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\bin\Windows8\Debug\NetworkChess.pdb">
+      <PackagePath>NetworkChess.pdb</PackagePath>
+      <Modified>2013-10-27T16:04:46.459</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\MonoGame.Framework.dll">
+      <PackagePath>MonoGame.Framework.dll</PackagePath>
+      <Modified>2013-02-25T16:44:00.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.Direct2D1.dll">
+      <PackagePath>SharpDX.Direct2D1.dll</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.Direct3D11.dll">
+      <PackagePath>SharpDX.Direct3D11.dll</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.dll">
+      <PackagePath>SharpDX.dll</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.DXGI.dll">
+      <PackagePath>SharpDX.DXGI.dll</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.MediaFoundation.dll">
+      <PackagePath>SharpDX.MediaFoundation.dll</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.XAudio2.dll">
+      <PackagePath>SharpDX.XAudio2.dll</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.XInput.dll">
+      <PackagePath>SharpDX.XInput.dll</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.xml">
+      <PackagePath>SharpDX.xml</PackagePath>
+      <Modified>2012-12-28T16:17:34.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.XInput.xml">
+      <PackagePath>SharpDX.XInput.xml</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.Direct2D1.xml">
+      <PackagePath>SharpDX.Direct2D1.xml</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.Direct3D11.xml">
+      <PackagePath>SharpDX.Direct3D11.xml</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.DXGI.xml">
+      <PackagePath>SharpDX.DXGI.xml</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.MediaFoundation.xml">
+      <PackagePath>SharpDX.MediaFoundation.xml</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\MSBuild\..\MonoGame\v3.0\Assemblies\Windows8\SharpDX.XAudio2.xml">
+      <PackagePath>SharpDX.XAudio2.xml</PackagePath>
+      <Modified>2012-12-28T16:17:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Assets\Logo.png">
+      <PackagePath>Assets\Logo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-01-06T18:37:42.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Assets\SmallLogo.png">
+      <PackagePath>Assets\SmallLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-01-06T18:37:42.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Assets\SplashScreen.png">
+      <PackagePath>Assets\SplashScreen.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-01-06T18:37:42.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Assets\StoreLogo.png">
+      <PackagePath>Assets\StoreLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-01-06T18:37:42.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\Black_Bishop.png">
+      <PackagePath>Content\Graphics\Black_Bishop.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.830</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\Black_Castle.png">
+      <PackagePath>Content\Graphics\Black_Castle.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.834</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\Black_King.png">
+      <PackagePath>Content\Graphics\Black_King.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.838</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\Black_Knight.png">
+      <PackagePath>Content\Graphics\Black_Knight.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.842</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\Black_Pawn.png">
+      <PackagePath>Content\Graphics\Black_Pawn.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.846</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\Black_Queen.png">
+      <PackagePath>Content\Graphics\Black_Queen.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.850</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\Chess_Board.png">
+      <PackagePath>Content\Graphics\Chess_Board.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.886</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\White_Bishop.png">
+      <PackagePath>Content\Graphics\White_Bishop.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.889</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\White_Castle.png">
+      <PackagePath>Content\Graphics\White_Castle.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.911</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\White_King.png">
+      <PackagePath>Content\Graphics\White_King.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.928</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\White_Knight.png">
+      <PackagePath>Content\Graphics\White_Knight.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.932</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\White_Pawn.png">
+      <PackagePath>Content\Graphics\White_Pawn.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.935</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\Content\Graphics\White_Queen.png">
+      <PackagePath>Content\Graphics\White_Queen.png</PackagePath>
+      <Modified>2013-10-25T19:49:44.939</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\bin\Windows8\Debug\App.xaml">
+      <PackagePath>App.xaml</PackagePath>
+      <Modified>2013-10-25T19:22:16.393</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\bin\Windows8\Debug\Common\StandardStyles.xaml">
+      <PackagePath>Common\StandardStyles.xaml</PackagePath>
+      <Modified>2013-01-06T18:37:42.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\bin\Windows8\Debug\GamePage.xaml">
+      <PackagePath>GamePage.xaml</PackagePath>
+      <Modified>2013-10-25T19:22:16.450</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\bin\Windows8\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2013-10-27T15:10:36.272</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
