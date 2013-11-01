@@ -28,10 +28,22 @@ namespace ChessGame.GameLogic
             return true;
         }
 
-        public void MoveAway()
+        public Piece MoveAway()
         {
+            Piece p = piece;
+
             piece = null;
             occupied = false;
+
+            return p;
+        }
+
+        public bool Capture(Piece p)
+        {
+            if (!occupied)
+                return false;
+            piece = p;
+            return true;
         }
 
 

@@ -284,18 +284,88 @@ namespace ChessGame.GameLogic
             int Dx = GetLocX(destination);
             int Dy = GetLocY(destination);
 
+            bool success = false;
+
             ChessGame.GameLogic.Game.Team team = board[Ox, Oy].piece.Team;
 
             // black moves down, white moves up.
 
-            if (Ox == Oy)
+            switch (team)
             {
-                // do stuff (need to figure out team)
+                case Game.Team.Black:
+                    // If the pawn is moving forward. No capture.
+                    if (Ox == Dx)
+                    {
+                        // When moving forward a pawn cannot capture.
+                        if(!IsSquareOccupied(destination))
+                        {
+                            // Black pawns move down the board.
+                            if ((Dy + 1) == Oy)
+                            {
+                                setSquare(GetWhatIsInSquare(origin), destination);
+                                success = true;
+                            }
+                        }
+                    }
+
+                    // diagnal capture
+
+                    // Black pawns move down the board.
+                    if ((Dy + 1) == Oy)
+                    {
+                        // capture diagnal right.
+                        if (Dx == (Ox + 1))
+                        {
+                            if (IsSquareOccupied(destination))
+                            {
+                                if (board[Dx, Dy].piece.Team != team)
+                                {
+                                    // We know that spot is ocupied by the enemy.
+                                    board[Dx, Dy].Capture(board[Ox, Oy].MoveAway());
+                                }
+                            }
+                        }
+                        // capture diagnal left
+                        else if (Dx == (Ox - 1))
+                        {
+                            if (IsSquareOccupied(destination))
+                            {
+                                if (board[Dx, Dy].piece.Team != team)
+                                {
+                                    // We know that spot is ocupied by the enemy.
+                                }
+                            }
+                        } 
+                    }
+
+                    
+
+                    break;
+
+                case Game.Team.White:
+                    if (Ox == Dx)
+                    {
+                        // When moving forward a pawn cannot capture.
+                        if (!IsSquareOccupied(destination))
+                        {
+                            //White pawns move up the board.
+                            if ((Dy - 1) == Oy)
+                            {
+                                setSquare(GetWhatIsInSquare(origin), destination);
+                                success = true;
+                            }
+                        }
+                    }
+                    break;
+
+                default:
+                    return false;
+
             }
 
             // remember to take into account diagnal capture
 
-            return false;
+            return success;
         }
 
         public bool moveRook(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
