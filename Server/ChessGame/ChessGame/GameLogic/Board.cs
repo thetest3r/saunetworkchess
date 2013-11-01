@@ -13,7 +13,7 @@ namespace ChessGame.GameLogic
 
         public Board()
         {
-            
+            SetUpBoard();
         }
 
         public void SetUpBoard()
@@ -81,6 +81,13 @@ namespace ChessGame.GameLogic
             int x = GetLocX(loc);
             int y = GetLocY(loc);
             return board[x, y].occupied;
+        }
+
+        public Piece GetWhatIsInSquare(Game.Locations loc)
+        {
+            int x = GetLocX(loc);
+            int y = GetLocY(loc);
+            return board[x, y].piece;
         }
 
         public Game.Team WhatTeamOwnsSquare(Game.Locations loc)
@@ -266,6 +273,84 @@ namespace ChessGame.GameLogic
                 default:
                     return -1;
             }
+        }
+
+
+        public bool movePawn(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            int Ox = GetLocX(origin);
+            int Oy = GetLocY(origin);
+
+            int Dx = GetLocX(destination);
+            int Dy = GetLocY(destination);
+
+            ChessGame.GameLogic.Game.Team team = board[Ox, Oy].piece.Team;
+
+            // black moves down, white moves up.
+
+            if (Ox == Oy)
+            {
+                // do stuff (need to figure out team)
+            }
+
+            // remember to take into account diagnal capture
+
+            return false;
+        }
+
+        public bool moveRook(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            int Ox = GetLocX(origin);
+            int Oy = GetLocY(origin);
+
+            int Dx = GetLocX(destination);
+            int Dy = GetLocY(destination);
+
+            return false;
+        }
+
+        public bool moveBishiop(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            int Ox = GetLocX(origin);
+            int Oy = GetLocY(origin);
+
+            int Dx = GetLocX(destination);
+            int Dy = GetLocY(destination);
+
+            return false;
+        }
+
+        public bool moveKnight(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            int Ox = GetLocX(origin);
+            int Oy = GetLocY(origin);
+
+            int Dx = GetLocX(destination);
+            int Dy = GetLocY(destination);
+
+            return false;
+        }
+
+        public bool moveQueen(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            int Ox = GetLocX(origin);
+            int Oy = GetLocY(origin);
+
+            int Dx = GetLocX(destination);
+            int Dy = GetLocY(destination);
+
+            return false;
+        }
+
+        public bool moveKing(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            int Ox = GetLocX(origin);
+            int Oy = GetLocY(origin);
+
+            int Dx = GetLocX(destination);
+            int Dy = GetLocY(destination);
+
+            return false;
         }
 
     }

@@ -27,10 +27,54 @@ namespace ChessGame.GameLogic
 
         }
 
+        bool Move(Team t, Locations origin, Locations destination)
+        {
+            if (!board.IsSquareOccupied(origin))
+            {
+                return false;
+            }
+
+            Piece pieceToMove = board.GetWhatIsInSquare(origin);
+
+            if (pieceToMove.Team != t)
+            {
+                return false;
+            }
+
+            bool successful = false;
+
+            switch (pieceToMove.Type)
+            {
+
+                case TypeOfPiece.pawn:
+                    successful = board.movePawn(origin, destination);
+                    break;
+                case TypeOfPiece.rook:
+                    successful = board.moveRook(origin, destination);
+                    break;
+                case TypeOfPiece.bishop:
+                    successful = board.moveBishiop(origin, destination);
+                    break;
+                case TypeOfPiece.knight:
+                    successful = board.moveKnight(origin, destination);
+                    break;
+                case TypeOfPiece.queen:
+                    successful = board.moveQueen(origin, destination);
+                    break;
+                case TypeOfPiece.king:
+                    successful = board.moveKing(origin, destination);
+                    break;
+
+                default:
+                    break;
+            }
+
+
+            return successful;
+        }
+
+
         
-
-
-
 
 
 
