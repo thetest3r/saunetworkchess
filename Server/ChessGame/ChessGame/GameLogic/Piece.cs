@@ -21,7 +21,7 @@ namespace ChessGame.GameLogic
 
         public void Promote()
         {
-
+            Type = Game.TypeOfPiece.queen;
         }
 
         public void Move()
