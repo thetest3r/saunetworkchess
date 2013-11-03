@@ -1,0 +1,6 @@
+C:\Users\Colby\Documents\Network Chess\Checkmate! (SCP)\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Users\Colby\Documents\Network Chess\Checkmate! (SCP)\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\Colby\Documents\Network Chess\Checkmate! (SCP)\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\Colby\Documents\Network Chess\Checkmate! (SCP)\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\Colby\Documents\Network Chess\Checkmate! (SCP)\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Colby\Documents\Network Chess\Checkmate! (SCP)\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
