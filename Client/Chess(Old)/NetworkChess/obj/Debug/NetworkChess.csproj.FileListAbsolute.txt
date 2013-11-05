@@ -58,3 +58,16 @@ C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\Netw
 C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\bin\Windows8\Debug\Content\Graphics\White_Knight.png
 C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\bin\Windows8\Debug\Content\Graphics\White_Pawn.png
 C:\Users\TT3 Productions\documents\visual studio 2012\Projects\NetworkChess\NetworkChess\bin\Windows8\Debug\Content\Graphics\White_Queen.png
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\NetworkChess.csprojResolveAssemblyReference.cache
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\App.g.i.cs
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\App.g.cs
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\Common\StandardStyles.g.i.cs
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\Common\StandardStyles.g.cs
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\GamePage.g.i.cs
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\GamePage.g.cs
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\XamlTypeInfo.g.cs
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\App.xaml
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\Common\StandardStyles.xaml
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\GamePage.xaml
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\NetworkChess.exe
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess(Old)\NetworkChess\obj\Debug\NetworkChess.pdb
