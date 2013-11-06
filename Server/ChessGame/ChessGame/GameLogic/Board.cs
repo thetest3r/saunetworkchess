@@ -7,7 +7,8 @@ namespace ChessGame.GameLogic
 {
     class Board
     {
-
+        private Game.Locations WhiteKingLoc;
+        private Game.Locations BlackKingLoc;
 
         Square[,] board = new Square[8, 8];
 
@@ -36,6 +37,7 @@ namespace ChessGame.GameLogic
             setSquare(BlackKnight, Game.Locations.b8);
             setSquare(BlackBishiop, Game.Locations.c8);
             setSquare(BlackKing, Game.Locations.d8);
+            BlackKingLoc = Game.Locations.d8;
             setSquare(BlackQueen, Game.Locations.e8);
             setSquare(BlackBishiop, Game.Locations.f8);
             setSquare(BlackKnight, Game.Locations.g8);
@@ -54,6 +56,7 @@ namespace ChessGame.GameLogic
             setSquare(WhiteKnight, Game.Locations.b1);
             setSquare(WhiteBishiop, Game.Locations.c1);
             setSquare(WhiteKing, Game.Locations.d1);
+            WhiteKingLoc = Game.Locations.d1;
             setSquare(WhiteQueen, Game.Locations.e1);
             setSquare(WhiteBishiop, Game.Locations.f1);
             setSquare(WhiteKnight, Game.Locations.g1);
@@ -474,16 +477,24 @@ namespace ChessGame.GameLogic
 
         }
 
-        private void genericMove(int Ox, int Oy, int Dx, int Dy)
+        private bool checkForCheckandMove(int Ox, int Oy, int Dx, int Dy)
         {
+            // Add checks for checkmate
+
+
+
+
+
             Piece pieceToMove = board[Ox, Oy].MoveAway();
             if (board[Dx, Dy].occupied)
             {
                 board[Dx, Dy].Capture(pieceToMove);
+                return true;
             }
             else
             {
                 board[Dx, Dy].MoveTo(pieceToMove);
+                return true;
             }
         }
 
@@ -624,8 +635,7 @@ namespace ChessGame.GameLogic
             {
                 if (list[i] == destination)
                 {
-                    success = true;
-                    genericMove(Ox, Oy, Dx, Dy);
+                    success = checkForCheckandMove(Ox, Oy, Dx, Dy);
                     if((Dy == 7) && (team == Game.Team.White))
                     {
                         board[Dx, Dy].piece.Promote();
@@ -678,15 +688,13 @@ namespace ChessGame.GameLogic
                     {
                         if (GetLocation(x, y) == destination)
                         {
-                            genericMove(Ox, Oy, Dx, Dy);
-                            return true;
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
                         }
                     }
                 }
                 else if (GetLocation(x, y) == destination)
                 {
-                    genericMove(Ox, Oy, Dx, Dy);
-                    return true;
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
                 }
             }
 
@@ -707,15 +715,13 @@ namespace ChessGame.GameLogic
                     {
                         if (GetLocation(x, y) == destination)
                         {
-                            genericMove(Ox, Oy, Dx, Dy);
-                            return true;
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
                         }
                     }
                 }
                 else if (GetLocation(x, y) == destination)
                 {
-                    genericMove(Ox, Oy, Dx, Dy);
-                    return true;
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
                 }
             }
 
@@ -738,15 +744,13 @@ namespace ChessGame.GameLogic
                     {
                         if (GetLocation(x, y) == destination)
                         {
-                            genericMove(Ox, Oy, Dx, Dy);
-                            return true;
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
                         }
                     }
                 }
                 else if (GetLocation(x, y) == destination)
                 {
-                    genericMove(Ox, Oy, Dx, Dy);
-                    return true;
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
                 }
             }
 
@@ -767,15 +771,13 @@ namespace ChessGame.GameLogic
                     {
                         if (GetLocation(x, y) == destination)
                         {
-                            genericMove(Ox, Oy, Dx, Dy);
-                            return true;
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
                         }
                     }
                 }
                 else if (GetLocation(x, y) == destination)
                 {
-                    genericMove(Ox, Oy, Dx, Dy);
-                    return true;
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
                 }
             }
 
@@ -817,15 +819,13 @@ namespace ChessGame.GameLogic
                     {
                         if (GetLocation(x, y) == destination)
                         {
-                            genericMove(Ox, Oy, Dx, Dy);
-                            return true;
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
                         }
                     }
                 }
                 else if (GetLocation(x, y) == destination)
                 {
-                    genericMove(Ox, Oy, Dx, Dy);
-                    return true;
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
                 }
             }
 
@@ -849,15 +849,13 @@ namespace ChessGame.GameLogic
                     {
                         if (GetLocation(x, y) == destination)
                         {
-                            genericMove(Ox, Oy, Dx, Dy);
-                            return true;
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
                         }
                     }
                 }
                 else if (GetLocation(x, y) == destination)
                 {
-                    genericMove(Ox, Oy, Dx, Dy);
-                    return true;
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
                 }
             }
 
@@ -878,15 +876,13 @@ namespace ChessGame.GameLogic
                     {
                         if (GetLocation(x, y) == destination)
                         {
-                            genericMove(Ox, Oy, Dx, Dy);
-                            return true;
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
                         }
                     }
                 }
                 else if (GetLocation(x, y) == destination)
                 {
-                    genericMove(Ox, Oy, Dx, Dy);
-                    return true;
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
                 }
             }
 
@@ -907,15 +903,13 @@ namespace ChessGame.GameLogic
                     {
                         if (GetLocation(x, y) == destination)
                         {
-                            genericMove(Ox, Oy, Dx, Dy);
-                            return true;
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
                         }
                     }
                 }
                 else if (GetLocation(x, y) == destination)
                 {
-                    genericMove(Ox, Oy, Dx, Dy);
-                    return true;
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
                 }
             }
 
@@ -989,8 +983,7 @@ namespace ChessGame.GameLogic
             {
                 if (list[i] == destination)
                 {
-                    genericMove(Ox, Oy, Dx, Dy);
-                    return true;
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);                    
                 }
             }
 
@@ -1005,6 +998,243 @@ namespace ChessGame.GameLogic
             int Dx = GetLocX(destination);
             int Dy = GetLocY(destination);
 
+            bool obsticleDownLeft = false;
+            bool obsticleDownRight = false;
+            bool obsticleUpLeft = false;
+            bool obsticleUpRight = false;
+
+            bool obsticleLeft = false;
+            bool obsticleRight = false;
+            bool obsticleUp = false;
+            bool obsticleDown = false;
+
+            ChessGame.GameLogic.Game.Team team = board[Ox, Oy].piece.Team;
+
+            int x = Ox;
+            int y = Oy;
+
+            while (!obsticleDownLeft)
+            {
+                x--;
+                y--;
+
+                // We don't need to check off the edge of the board
+                if ((x < 0) || (y < 0))
+                {
+                    break;
+                }
+                if (IsSquareOccupied(x, y))
+                {
+                    obsticleDownLeft = true;
+                    if (team != board[x, y].piece.Team)
+                    {
+                        if (GetLocation(x, y) == destination)
+                        {
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                        }
+                    }
+                }
+                else if (GetLocation(x, y) == destination)
+                {
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                }
+            }
+
+            x = Ox;
+            y = Oy;
+
+            while (!obsticleDownRight)
+            {
+                x++;
+                y--;
+
+                // We don't need to check off the edge of the board
+                if ((x > 7) || (y < 0))
+                {
+                    break;
+                }
+                if (IsSquareOccupied(x, y))
+                {
+                    obsticleDownRight = true;
+                    if (team != board[x, y].piece.Team)
+                    {
+                        if (GetLocation(x, y) == destination)
+                        {
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                        }
+                    }
+                }
+                else if (GetLocation(x, y) == destination)
+                {
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                }
+            }
+
+            while (!obsticleUpLeft)
+            {
+                x--;
+                y++;
+
+                // We don't need to check off the edge of the board
+                if ((x < 0) || (y > 7))
+                {
+                    break;
+                }
+                if (IsSquareOccupied(x, y))
+                {
+                    obsticleUpLeft = true;
+                    if (team != board[x, y].piece.Team)
+                    {
+                        if (GetLocation(x, y) == destination)
+                        {
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                        }
+                    }
+                }
+                else if (GetLocation(x, y) == destination)
+                {
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                }
+            }
+
+            while (!obsticleUpRight)
+            {
+                x++;
+                y++;
+
+                // We don't need to check off the edge of the board
+                if ((x > 7) || (y > 7))
+                {
+                    break;
+                }
+                if (IsSquareOccupied(x, y))
+                {
+                    obsticleUpRight = true;
+                    if (team != board[x, y].piece.Team)
+                    {
+                        if (GetLocation(x, y) == destination)
+                        {
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                        }
+                    }
+                }
+                else if (GetLocation(x, y) == destination)
+                {
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                }
+            }
+
+            x = Ox;
+            y = Oy;
+            // Look to the left of the rook for the correct move.
+            while (!obsticleLeft)
+            {
+                x -= 1;
+                // We don't need to check off the edge of the board
+                if (x < 0)
+                {
+                    break;
+                }
+                if (IsSquareOccupied(x, y))
+                {
+                    obsticleLeft = true;
+                    if (team != board[x, y].piece.Team)
+                    {
+                        if (GetLocation(x, y) == destination)
+                        {
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                        }
+                    }
+                }
+                else if (GetLocation(x, y) == destination)
+                {
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                }
+            }
+
+            x = Ox;
+
+            while (!obsticleRight)
+            {
+                x += 1;
+                // We don't need to check off the edge of the board
+                if (x > 7)
+                {
+                    break;
+                }
+                if (IsSquareOccupied(x, y))
+                {
+                    obsticleRight = true;
+                    if (team != board[x, y].piece.Team)
+                    {
+                        if (GetLocation(x, y) == destination)
+                        {
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                        }
+                    }
+                }
+                else if (GetLocation(x, y) == destination)
+                {
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                }
+            }
+
+            x = Ox;
+
+            // now check up
+
+            while (!obsticleUp)
+            {
+                y += 1;
+                // We don't need to check off the edge of the board
+                if (y > 7)
+                {
+                    break;
+                }
+                if (IsSquareOccupied(x, y))
+                {
+                    obsticleUp = true;
+                    if (team != board[x, y].piece.Team)
+                    {
+                        if (GetLocation(x, y) == destination)
+                        {
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                        }
+                    }
+                }
+                else if (GetLocation(x, y) == destination)
+                {
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                }
+            }
+
+            y = Oy;
+
+            while (!obsticleDown)
+            {
+                y -= 1;
+                // We don't need to check off the edge of the board
+                if (y > 7)
+                {
+                    break;
+                }
+                if (IsSquareOccupied(x, y))
+                {
+                    obsticleDown = true;
+                    if (team != board[x, y].piece.Team)
+                    {
+                        if (GetLocation(x, y) == destination)
+                        {
+                            return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                        }
+                    }
+                }
+                else if (GetLocation(x, y) == destination)
+                {
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                }
+            }
+
             return false;
         }
 
@@ -1015,6 +1245,68 @@ namespace ChessGame.GameLogic
 
             int Dx = GetLocX(destination);
             int Dy = GetLocY(destination);
+
+            ChessGame.GameLogic.Game.Team team = board[Ox, Oy].piece.Team;
+
+            List<Game.Locations> list = new List<Game.Locations>();
+
+            Game.Locations temporary;
+
+            temporary = GetLocation((Ox + 1), (Oy - 1));
+            if (temporary != Game.Locations.invalid)
+            {
+                list.Add(temporary);
+            }
+
+            temporary = GetLocation((Ox + 1), (Oy));
+            if (temporary != Game.Locations.invalid)
+            {
+                list.Add(temporary);
+            }
+
+            temporary = GetLocation((Ox + 1), (Oy + 1));
+            if (temporary != Game.Locations.invalid)
+            {
+                list.Add(temporary);
+            }
+
+            temporary = GetLocation((Ox), (Oy + 1));
+            if (temporary != Game.Locations.invalid)
+            {
+                list.Add(temporary);
+            }
+
+            temporary = GetLocation((Ox), (Oy - 1));
+            if (temporary != Game.Locations.invalid)
+            {
+                list.Add(temporary);
+            }
+
+            temporary = GetLocation((Ox - 1), (Oy + 1));
+            if (temporary != Game.Locations.invalid)
+            {
+                list.Add(temporary);
+            }
+
+            temporary = GetLocation((Ox - 1), (Oy));
+            if (temporary != Game.Locations.invalid)
+            {
+                list.Add(temporary);
+            }
+
+            temporary = GetLocation((Ox - 1), (Oy - 1));
+            if (temporary != Game.Locations.invalid)
+            {
+                list.Add(temporary);
+            }
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] == destination)
+                {
+                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                }
+            }
 
             return false;
         }
