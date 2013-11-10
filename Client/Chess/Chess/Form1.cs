@@ -27,12 +27,12 @@ namespace Chess
                 if (!isImageLoaded)
                 {
                     loadPNG(); 
-                    isImageLoaded = false;
+                    isImageLoaded = true;
                 }
                 this.row = row; this.col = col;
                 this.Size = CellSize;
                 this.BackColor = (col % 2 == row % 2) ? Color.Black : Color.White;
-                this.Image = chessPieceList[1];
+                if(row == 0 && col ==0) this.Image = chessPieceList[1];
             }
             public override string ToString() { return "Cell(" + row + "," + col + ")"; }
             private void loadPNG()
@@ -54,9 +54,35 @@ namespace Chess
                     chessPieceList.Add(temp);
                     //Console.WriteLine("{0}", temp_string);
                 }
-                
+            }
+            private PictureBox tempSwitchPicture;
+            private Image tempImage;
+            private PictureBox tempTemp;
+            private bool canSwitch = false;
+
+            private void PictureClick(object sender, MouseEventArgs e)
+            {
+                if (!canSwitch)
+                {
+                    tempSwitchPicture = (PictureBox)sender;
+                    tempImage = tempSwitchPicture.Image;
+                    canSwitch = true;
+                }
+                if (canSwitch)
+                {
+                    if (DoDragDrop(tempSwitchPicture, DragDropEffects.Move) == DragDropEffects.Move)
+                    {
+                        tempTemp = (PictureBox)sender;
+                        tempTemp.Image = tempImage;
+                    }
+                }
             }
             private void pieceTracker()
+            {
+
+            }
+
+            public void dostuff()
             {
 
             }
@@ -71,6 +97,7 @@ namespace Chess
             InitializeComponent();
             cells = GetBoard();
             this.Controls.Add(cells);
+            
         }
         private TableLayoutPanel GetBoard()
         {
