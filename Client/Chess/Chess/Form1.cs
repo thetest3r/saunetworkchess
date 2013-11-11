@@ -16,7 +16,19 @@ namespace Chess
         class Cell : PictureBox
         {
             public static readonly System.Drawing.Size CellSize = new System.Drawing.Size(75, 75);
-            private List<Image> chessPieceList = new List<Image>();
+            private static List<Image> chessPieceList = new List<Image>();
+            private enum pieces { WCastle, WKnight, WBishop, WKing, WQueen, WPawn, Blank, BCastle, BKnight, BBishop, BKing, BQueen, BPawn };
+            private static  pieces[,] boardArray = new pieces[8, 8] 
+            {
+            {pieces.BCastle,pieces.BKnight,pieces.BBishop, pieces.BKing, pieces.BQueen, pieces.BBishop, pieces.BKnight, pieces.BCastle},
+            {pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn},
+            {pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank},
+            {pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank},
+            {pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank},
+            {pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank},
+            {pieces.WPawn, pieces.WPawn, pieces.WPawn, pieces.WPawn, pieces.WPawn, pieces.WPawn, pieces.WPawn, pieces.WPawn},
+            {pieces.WCastle,pieces.WKnight,pieces.WBishop, pieces.WKing, pieces.WQueen, pieces.WBishop, pieces.WKnight, pieces.WCastle}
+            };
             private bool isImageLoaded = false;
             //Temp image that is loaded
             //Image temp_piece = Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\White_Pawn.png");
@@ -31,10 +43,43 @@ namespace Chess
                 }
                 this.row = row; this.col = col;
                 this.Size = CellSize;
-                this.BackColor = (col % 2 == row % 2) ? Color.Black : Color.White;
-                if(row == 0 && col ==0) this.Image = chessPieceList[1];
+                this.BackColor = (col % 2 == row % 2) ? Color.Black : Color.DarkGray;
+                this.SizeMode = PictureBoxSizeMode.StretchImage;
+                this.Image = loadPiece(row, col);
             }
             public override string ToString() { return "Cell(" + row + "," + col + ")"; }
+            private static Image loadPiece(int row, int col)
+            {
+                switch (boardArray[row, col])
+                {
+                    case pieces.WPawn:
+                        return chessPieceList[0];
+                    case pieces.WCastle:
+                        return chessPieceList[1];
+                    case pieces.WKnight:
+                        return chessPieceList[2];
+                    case pieces.WBishop:
+                        return chessPieceList[3];
+                    case pieces.WQueen:
+                        return chessPieceList[4];
+                    case pieces.WKing:
+                        return chessPieceList[5];
+                    case pieces.BPawn:
+                        return chessPieceList[6];
+                    case pieces.BCastle:
+                        return chessPieceList[7];
+                    case pieces.BKnight:
+                        return chessPieceList[8];
+                    case pieces.BBishop:
+                        return chessPieceList[9];
+                    case pieces.BQueen:
+                        return chessPieceList[10];
+                    case pieces.BKing:
+                        return chessPieceList[11];
+                    default:
+                        return null;
+                }
+            }
             private void loadPNG()
             {
                 string folder_address = "C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content";
