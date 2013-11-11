@@ -141,8 +141,8 @@ namespace Chess
             //ImageList1.Images.Add(Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\white_pawn.png"));
             InitializeComponent();
             cells = GetBoard();
-            this.Controls.Add(cells);
-            
+            this.Controls.Add(cells);     
+   
         }
         private TableLayoutPanel GetBoard()
         {
@@ -156,7 +156,7 @@ namespace Chess
                 for (int col = 0; col < b.ColumnCount; col++)
                 {
                     Cell cell = new Cell(row, col);
-                    cell.Click += new EventHandler(cell_Click);
+                    cell.Click += new EventHandler(this.cell_Click);
                     b.Controls.Add(cell, col, row);
                 }
             }
@@ -168,14 +168,26 @@ namespace Chess
             //Application.DoEvents();
             return b;
         }
-
         private void cell_Click(object sender, EventArgs e)
         {
             Cell cell = (Cell)sender;
-            System.Diagnostics.Debug.WriteLine("Click: " + cell);
+            //System.Diagnostics.Debug.WriteLine("Click: " + cell);
+            string i = sender.ToString();
+            IPAddrBox.Text = "Hello World" + i;
+        }
+        
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int i = int.Parse(IPAddrBox.Text);
+            i += 1;
+            IPAddrBox.Text = i.ToString();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
