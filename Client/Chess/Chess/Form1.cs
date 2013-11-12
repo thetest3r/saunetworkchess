@@ -12,7 +12,8 @@ namespace Chess
     public partial class Form1 : Form
     {
         private TableLayoutPanel cells;
-
+        private Cell prevClickedCell = null;
+        private bool prevTrack = false;
         class Cell : PictureBox
         {
             public static readonly System.Drawing.Size CellSize = new System.Drawing.Size(75, 75);
@@ -100,38 +101,10 @@ namespace Chess
                     //Console.WriteLine("{0}", temp_string);
                 }
             }
-            private PictureBox tempSwitchPicture;
-            private Image tempImage;
-            private PictureBox tempTemp;
-            private bool canSwitch = false;
-
-            private void PictureClick(object sender, MouseEventArgs e)
-            {
-                if (!canSwitch)
-                {
-                    tempSwitchPicture = (PictureBox)sender;
-                    tempImage = tempSwitchPicture.Image;
-                    canSwitch = true;
-                }
-                if (canSwitch)
-                {
-                    if (DoDragDrop(tempSwitchPicture, DragDropEffects.Move) == DragDropEffects.Move)
-                    {
-                        tempTemp = (PictureBox)sender;
-                        tempTemp.Image = tempImage;
-                    }
-                }
-            }
-            private void pieceTracker()
-            {
-
-            }
-
-            public void dostuff()
-            {
-
-            }
-
+            //private PictureBox tempSwitchPicture;
+            //private Image tempImage;
+            //private PictureBox tempTemp;
+            //private bool canSwitch = false;
         }
 
         public Form1()
@@ -141,7 +114,8 @@ namespace Chess
             //ImageList1.Images.Add(Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\white_pawn.png"));
             InitializeComponent();
             cells = GetBoard();
-            this.Controls.Add(cells);     
+            this.Controls.Add(cells);
+            // Reference: http://msdn.microsoft.com/en-us/library/system.windows.forms.control.controlcollection.clear(v=vs.110).aspx (to clear form)
    
         }
         private TableLayoutPanel GetBoard()
@@ -170,10 +144,29 @@ namespace Chess
         }
         private void cell_Click(object sender, EventArgs e)
         {
-            Cell cell = (Cell)sender;
+            Cell temp = (Cell)sender;
+            if (prevClickedCell == null)
+            {
+                prevClickedCell = (Cell)sender;
+            }
+            else if (prevClickedCell == temp)
+            {
+                IPAddrBox.Text = "Invalid Move!";
+                return;
+            }
+            else //Needs more conditions
+            {
+                temp.Image = prevClickedCell.Image;
+                prevClickedCell.Image = null;
+                prevClickedCell = null;
+            }
+                //
+            if (!prevTrack)// prevTrack is 0
+                prevClickedCell = (Cell)sender;
             //System.Diagnostics.Debug.WriteLine("Click: " + cell);
             string i = sender.ToString();
             IPAddrBox.Text = "Hello World" + i;
+            //Reference to update picture inside picture box http://stackoverflow.com/questions/9030622/how-to-refresh-picturebox
         }
         
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -185,6 +178,7 @@ namespace Chess
             int i = int.Parse(IPAddrBox.Text);
             i += 1;
             IPAddrBox.Text = i.ToString();
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

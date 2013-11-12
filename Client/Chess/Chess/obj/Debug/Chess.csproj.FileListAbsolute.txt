@@ -7,3 +7,12 @@ c:\users\tt3 productions\documents\visual studio 2012\Projects\Chess\Chess\obj\D
 c:\users\tt3 productions\documents\visual studio 2012\Projects\Chess\Chess\obj\Debug\Chess.exe
 c:\users\tt3 productions\documents\visual studio 2012\Projects\Chess\Chess\obj\Debug\Chess.pdb
 C:\Users\TT3 Productions\documents\visual studio 2012\Projects\Chess\Chess\obj\Debug\Chess.Form1.resources
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\bin\Debug\Chess.exe.config
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\obj\Debug\Chess.exe
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\obj\Debug\Chess.pdb
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\bin\Debug\Chess.exe
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\bin\Debug\Chess.pdb
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\obj\Debug\Chess.csprojResolveAssemblyReference.cache
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\obj\Debug\Chess.Form1.resources
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\obj\Debug\Chess.Properties.Resources.resources
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\obj\Debug\Chess.csproj.GenerateResource.Cache
