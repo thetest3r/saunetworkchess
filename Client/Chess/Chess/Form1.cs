@@ -161,8 +161,8 @@ namespace Chess
                 prevClickedCell = null;
             }
                 //
-            if (!prevTrack)// prevTrack is 0
-                prevClickedCell = (Cell)sender;
+            //if (!prevTrack)// prevTrack is 0
+            //    prevClickedCell = (Cell)sender;
             //System.Diagnostics.Debug.WriteLine("Click: " + cell);
             string i = sender.ToString();
             IPAddrBox.Text = "Hello World" + i;
