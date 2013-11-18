@@ -83,19 +83,19 @@ namespace Chess
             }
             private void loadPNG()
             {
-                string folder_address = "C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content";
+                //string folder_address = "C:\\Users\\TT3 Prod0uctions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content";
+                string folder_address = "Graphics\\";
                 string[] pieceName = new string[12];
                 //Console.WriteLine("{0}", sizeof
-                pieceName[0] = "\\White_Pawn.png"; pieceName[1] = "\\White_Castle.png"; pieceName[2] = "\\White_Knight.png";
-                pieceName[3] = "\\White_Bishop.png"; pieceName[4] = "\\White_Queen.png"; pieceName[5] = "\\White_King.png";
+                pieceName[0] = "White_Pawn.png"; pieceName[1] = "White_Castle.png"; pieceName[2] = "White_Knight.png";
+                pieceName[3] = "White_Bishop.png"; pieceName[4] = "White_Queen.png"; pieceName[5] = "White_King.png";
 
-                pieceName[6] = "\\Black_Pawn.png"; pieceName[7] = "\\Black_Castle.png"; pieceName[8] = "\\Black_Knight.png";
-                pieceName[9] = "\\Black_Bishop.png"; pieceName[10] = "\\Black_Queen.png"; pieceName[11] = "\\Black_King.png";
+                pieceName[6] = "Black_Pawn.png"; pieceName[7] = "Black_Castle.png"; pieceName[8] = "Black_Knight.png";
+                pieceName[9] = "Black_Bishop.png"; pieceName[10] = "Black_Queen.png"; pieceName[11] = "Black_King.png";
                 Image temp;
-                string temp_string;
                 for (int i = 0; i < 12; i++)
                 {
-                    temp_string = (folder_address + pieceName[i]);
+                    string temp_string = AppDomain.CurrentDomain.BaseDirectory + folder_address + pieceName[i];
                     temp = Image.FromFile(temp_string);
                     chessPieceList.Add(temp);
                     //Console.WriteLine("{0}", temp_string);
@@ -114,6 +114,7 @@ namespace Chess
             //ImageList1.Images.Add(Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\white_pawn.png"));
             InitializeComponent();
             cells = GetBoard();
+            //CONNECT TO THE SERVER
             this.Controls.Add(cells);
             // Reference: http://msdn.microsoft.com/en-us/library/system.windows.forms.control.controlcollection.clear(v=vs.110).aspx (to clear form)
    

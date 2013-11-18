@@ -36,7 +36,7 @@
             // IPAddrBox
             // 
             this.IPAddrBox.AccessibleName = "TextBox1";
-            this.IPAddrBox.Location = new System.Drawing.Point(602, 404);
+            this.IPAddrBox.Location = new System.Drawing.Point(602, 178);
             this.IPAddrBox.Name = "IPAddrBox";
             this.IPAddrBox.Size = new System.Drawing.Size(120, 20);
             this.IPAddrBox.TabIndex = 0;
@@ -44,7 +44,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(632, 430);
+            this.button1.Location = new System.Drawing.Point(624, 204);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -55,9 +55,9 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(602, 30);
+            this.listBox1.Location = new System.Drawing.Point(602, 12);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 368);
+            this.listBox1.Size = new System.Drawing.Size(120, 160);
             this.listBox1.TabIndex = 2;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
