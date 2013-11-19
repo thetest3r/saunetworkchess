@@ -57,6 +57,11 @@ namespace Checkmate_
             return dataFromClient.Substring(0, dataFromClient.IndexOf("$", StringComparison.Ordinal));
         }
 
+        public static void ReadInstruction(string instruction)
+        {
+
+        }
+
         public class HandleClient
         {
             private TcpClient _clientSocket;
@@ -81,7 +86,8 @@ namespace Checkmate_
                         requestCount += 1;
                         string dataFromClient = CheckmateServer.RecieveString(_clientSocket);
                         Console.WriteLine("From Client - " + _clientNumber + ": " + dataFromClient);
-                        CheckmateServer.SendString(dataFromClient, _clientNumber, true);
+                        //CheckmateServer.SendString(dataFromClient, _clientNumber, true);
+                        CheckmateServer.ReadInstruction(dataFromClient);
                     }
                     catch (Exception ex)
                     {
@@ -94,32 +100,16 @@ namespace Checkmate_
 
         public class CheckmateClient
         {
-            private TcpClient _socket;
-            private NetworkStream _stream;
-            private bool _connected;
-
-            public CheckmateClient()
-            {
-                _connected = false;
-            }
-
-            public bool Connected
-            {
-                get { return _connected; }
-                set
-                {
-                    _connected = value;
-                }
-            }
+            private TcpClient server;
+            static NetworkStream stream;
 
             public void ConnecttoServer()
             {
-                _socket = new TcpClient();
+                server = new TcpClient();
                 //Needs the I.P. Address of our samuel server
-                _socket.Connect("127.0.0.1", 8888);
-                _stream = _socket.GetStream();
-                Connected = true;
-                var thread = new Thread(ListentoServer);
+                server.Connect("127.0.0.1", 1991);
+                stream = server.GetStream();
+                var thread = new Thread(ListenforServer);
                 thread.Start();
             }
             public void UpdateClientList()
@@ -127,9 +117,22 @@ namespace Checkmate_
 
             }
             //Pass in tcpClient to start it. Will return 0 on success.
-            public void ListentoServer()
+            public void SendtoServer(string msg)
             {
+                msg = msg + "$";
+                byte[] bytes = Encoding.ASCII.GetBytes(msg);
+                stream.Write(bytes, 0, bytes.Length);
+                stream.Flush();
+            }
 
+            public void ListenforServer()
+            {
+                Console.Write("I'm listening");
+                var bytes = new byte[16384];
+                stream.Read(bytes, 0, server.ReceiveBufferSize);
+                string msg = Encoding.ASCII.GetString(bytes);
+                int index = msg.IndexOf("$") > 0 ? msg.IndexOf("$")
+                    : msg.IndexOf('\0');
                 return;
             }
         }

@@ -28,14 +28,16 @@ namespace Checkmate_
                 //Somebody connected and set us data
                 string dataFromClient = RecieveString(clientSocket);
                 ClientList.Add(dataFromClient, clientSocket);
-                Console.WriteLine(dataFromClient + " joined cat room.");
+                Console.WriteLine(dataFromClient + " joined chat room.");
                 var client = new HandleClient();
                 client.StartClient(clientSocket, dataFromClient);
+                SendString(dataFromClient + " joined.", dataFromClient, true);
             }
         }
 
         public static void SendString(string msg, string uname, bool flag)
         {
+            
             foreach (DictionaryEntry item in ClientList)
             {
                 var broadcastSocket = (TcpClient)item.Value;
@@ -49,9 +51,9 @@ namespace Checkmate_
 
         public static string RecieveString(TcpClient clientSocket)
         {
-            var bytesFrom = new byte[16384];
+            var bytesFrom = new byte[clientSocket.ReceiveBufferSize];
             NetworkStream networkStream = clientSocket.GetStream();
-            networkStream.Read(bytesFrom, 1, 60);
+            networkStream.Read(bytesFrom, 0, clientSocket.ReceiveBufferSize);
 
             string dataFromClient = Encoding.ASCII.GetString(bytesFrom);
             return dataFromClient.Substring(0, dataFromClient.IndexOf("$", StringComparison.Ordinal));
@@ -86,52 +88,14 @@ namespace Checkmate_
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.ToString());
+                        if(_clientSocket.Connected == false)
+                        {
+                            return;
+                        }
+                            
                     }
                 }
             }
         }
-
-
-        public class CheckmateClient
-        {
-            private TcpClient _socket;
-            private NetworkStream _stream;
-            private bool _connected;
-
-            public CheckmateClient()
-            {
-                _connected = false;
-            }
-
-            public bool Connected
-            {
-                get { return _connected; }
-                set
-                {
-                    _connected = value;
-                }
-            }
-
-            public void ConnecttoServer()
-            {
-                _socket = new TcpClient();
-                //Needs the I.P. Address of our samuel server
-                _socket.Connect("127.0.0.1", 8888);
-                _stream = _socket.GetStream();
-                Connected = true;
-                var thread = new Thread(ListentoServer);
-                thread.Start();
-            }
-            public void UpdateClientList()
-            {
-
-            }
-            //Pass in tcpClient to start it. Will return 0 on success.
-            public void ListentoServer()
-            {
-
-                return;
-            }
-        }
-	}
+    }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Checkmate_;
 //using System.Windows.Forms.ImageList;
 //http://www.mindstick.com/Articles/73eb92cb-7e33-4de9-bf52-4bf5314f6cda/?Displaying%20an%20array%20of%20images%20in%20pictureBox%20C //Reference this
 namespace Chess
@@ -14,6 +15,7 @@ namespace Chess
         private TableLayoutPanel cells;
         private Cell prevClickedCell = null;
         private bool prevTrack = false;
+        private CheckmateClient client;
         class Cell : PictureBox
         {
             public static readonly System.Drawing.Size CellSize = new System.Drawing.Size(75, 75);
@@ -113,6 +115,7 @@ namespace Chess
             //ImageList1.ImageSize = new Size(50, 50);
             //ImageList1.Images.Add(Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\white_pawn.png"));
             InitializeComponent();
+            client.ConnecttoServer();
             cells = GetBoard();
             //CONNECT TO THE SERVER
             this.Controls.Add(cells);
