@@ -1,0 +1,5 @@
+C:\Users\Colby\Documents\Network Chess\Server\ChessGame\ChessGame\bin\Debug\ChessGame.exe
+C:\Users\Colby\Documents\Network Chess\Server\ChessGame\ChessGame\bin\Debug\ChessGame.pdb
+C:\Users\Colby\Documents\Network Chess\Server\ChessGame\ChessGame\obj\x86\Debug\ChessGame.csprojResolveAssemblyReference.cache
+C:\Users\Colby\Documents\Network Chess\Server\ChessGame\ChessGame\obj\x86\Debug\ChessGame.exe
+C:\Users\Colby\Documents\Network Chess\Server\ChessGame\ChessGame\obj\x86\Debug\ChessGame.pdb

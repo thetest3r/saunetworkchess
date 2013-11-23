@@ -20,18 +20,20 @@ namespace Checkmate_
         {
             serverSocket = new TcpListener(IPAddress.Any, 1991);
             serverSocket.Start();
-            Console.WriteLine("Chat server started...");
+            Console.WriteLine("Checkmate! server started...");
+            int i = 1;
             while (true)
             {
                 //This next line of code actually blocks
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
                 //Somebody connected and set us data
-                string dataFromClient = RecieveString(clientSocket);
-                ClientList.Add(dataFromClient, clientSocket);
-                Console.WriteLine(dataFromClient + " joined chat room.");
+                //string dataFromClient = RecieveString(clientSocket);
+                ClientList.Add("player"+i.ToString(), clientSocket);
+                Console.WriteLine("player" + i.ToString() + " joined the lobby.");
                 var client = new HandleClient();
-                client.StartClient(clientSocket, dataFromClient);
-                SendString(dataFromClient + " joined.", dataFromClient, true);
+                client.StartClient(clientSocket, "player" + i.ToString());
+                //SendString("player" + i.ToString() + " joined.", "player" + i.ToString(), true);
+                i++;
             }
         }
 
@@ -82,7 +84,17 @@ namespace Checkmate_
                     {
                         requestCount += 1;
                         string dataFromClient = CheckmateServer.RecieveString(_clientSocket);
-                        Console.WriteLine("From Client - " + _clientNumber + ": " + dataFromClient);
+                        //Opcode of 0 is for sending a message
+                        if(dataFromClient[0] == '0')
+                        {
+                           dataFromClient =  dataFromClient.TrimStart('0');
+                            Console.WriteLine("From Client - " + _clientNumber + ": " + dataFromClient);
+                        }//Opcode 1 is for making a move
+                        else if(dataFromClient[0] == '1')
+                        {
+                            dataFromClient = dataFromClient.TrimStart('1');
+                            Console.WriteLine("From Client - " + _clientNumber + ": " + dataFromClient);
+                        }
                         CheckmateServer.SendString(dataFromClient, _clientNumber, true);
                     }
                     catch (Exception ex)

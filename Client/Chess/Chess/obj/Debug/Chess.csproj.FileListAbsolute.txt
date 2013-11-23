@@ -22,3 +22,5 @@ C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\obj\Debug\Chess.pdb
 C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\obj\Debug\Chess.csprojResolveAssemblyReference.cache
 C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\obj\Debug\Chess.Properties.Resources.resources
 C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\obj\Debug\Chess.csproj.GenerateResource.Cache
+C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\bin\Debug\Chess.exe
+C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\bin\Debug\Chess.pdb

@@ -115,6 +115,7 @@ namespace Chess
             //ImageList1.ImageSize = new Size(50, 50);
             //ImageList1.Images.Add(Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\white_pawn.png"));
             InitializeComponent();
+            client = new CheckmateClient();
             client.ConnecttoServer();
             cells = GetBoard();
             //CONNECT TO THE SERVER
@@ -170,6 +171,7 @@ namespace Chess
             //System.Diagnostics.Debug.WriteLine("Click: " + cell);
             string i = sender.ToString();
             IPAddrBox.Text = "Hello World" + i;
+            client.SendtoServer("0", "I'm clicking");
             //Reference to update picture inside picture box http://stackoverflow.com/questions/9030622/how-to-refresh-picturebox
         }
         
