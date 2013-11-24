@@ -14,6 +14,7 @@ namespace ChessGame.Network_Logic
 
         public static Hashtable ClientList = new Hashtable();
         public static TcpListener serverSocket;
+        List<GameLogic.Game> games = new List<GameLogic.Game>();
 
         public static void startListening()
         {
@@ -21,6 +22,7 @@ namespace ChessGame.Network_Logic
             serverSocket.Start();
             Console.WriteLine("Checkmate! server started...");
             int i = 1;
+            
             while (true)
             {
                 //This next line of code actually blocks
@@ -89,57 +91,7 @@ namespace ChessGame.Network_Logic
             string dataFromClient = Encoding.ASCII.GetString(bytesFrom);
             return dataFromClient.Substring(0, dataFromClient.IndexOf("$", StringComparison.Ordinal));
         }
-
-        public class HandleClient
-        {
-            private TcpClient _clientSocket;
-            private string _clientNumber;
-
-            public void StartClient(TcpClient clientSocket, string clientNumber)
-            {
-                _clientNumber = clientNumber;
-                _clientSocket = clientSocket;
-                var thread = new Thread(RecieveInstructions);
-                thread.Start();
-            }
-
-            private void RecieveInstructions()
-            {
-                var bytesFrom = new byte[16384];
-                int requestCount = 0;
-                while (true)
-                {
-                    try
-                    {
-                        requestCount += 1;
-                        string dataFromClient = Networkhandler.RecieveString(_clientSocket);
-                        //Opcode of 0 is for sending a message
-                        if (dataFromClient[0] == '0')
-                        {
-                            //dataFromClient = dataFromClient.TrimStart('0');
-                            Console.WriteLine("From Client - " + _clientNumber + ": " + dataFromClient);
-                            dataFromClient += "From Client " + _clientNumber;
-                            SendString(dataFromClient, _clientNumber, false);
-                        }//Opcode 1 is for making a move
-                        else if (dataFromClient[0] == '1')
-                        {
-                            dataFromClient = dataFromClient.TrimStart('1');
-                            Console.WriteLine("From Client - " + _clientNumber + ": " + dataFromClient);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.ToString());
-                        if (_clientSocket.Connected == false)
-                        {
-                            Console.WriteLine("removing client");
-                            ClientList.Remove(_clientSocket);
-                            return;
-                        }
-
-                    }
-                }
-            }
-        }
+        
+        
     }
 }
