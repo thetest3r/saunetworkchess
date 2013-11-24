@@ -31,20 +31,47 @@ namespace ChessGame.Network_Logic
                 Console.WriteLine("player" + i.ToString() + " joined the lobby.");
                 var client = new HandleClient();
                 client.StartClient(clientSocket, "player" + i.ToString());
-                //SendString("player" + i.ToString() + " joined.", "player" + i.ToString(), true);
+                SendMessage("6","player"+i.ToString());
+                UpdateClientsList(clientSocket);
                 i++;
             }
         }
 
+        public static void UpdateClientsList(TcpClient client)
+        {
+            int i = 1;
+            var broadcastSocket = client;
+            NetworkStream broadcastStream = broadcastSocket.GetStream();
+            foreach (DictionaryEntry item in ClientList)
+            {
+                byte[] broadcastBytes = Encoding.ASCII.GetBytes("6player"+ i);
+                broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
+                broadcastStream.Flush();
+                System.Threading.Thread.Sleep(1);
+                i++;
+            }
+        }
         public static void SendString(string msg, string uname, bool flag)
         {
-
             foreach (DictionaryEntry item in ClientList)
             {
                 var broadcastSocket = (TcpClient)item.Value;
                 NetworkStream broadcastStream = broadcastSocket.GetStream();
                 byte[] broadcastBytes = flag ? Encoding.ASCII.GetBytes(uname + " says: " + msg)
                     : Encoding.ASCII.GetBytes(msg);
+                broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
+                broadcastStream.Flush();
+            }
+        }
+
+        public static void SendMessage(string opCode, string msg)
+        {
+            string message = opCode + msg;
+            foreach (DictionaryEntry item in ClientList)
+            {
+                var broadcastSocket = (TcpClient)item.Value;
+                NetworkStream broadcastStream = broadcastSocket.GetStream();
+                byte[] broadcastBytes = Encoding.ASCII.GetBytes(message);
                 broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
                 broadcastStream.Flush();
             }
@@ -86,21 +113,24 @@ namespace ChessGame.Network_Logic
                         //Opcode of 0 is for sending a message
                         if (dataFromClient[0] == '0')
                         {
-                            dataFromClient = dataFromClient.TrimStart('0');
+                            //dataFromClient = dataFromClient.TrimStart('0');
                             Console.WriteLine("From Client - " + _clientNumber + ": " + dataFromClient);
+                            dataFromClient += "From Client " + _clientNumber;
+                            SendString(dataFromClient, _clientNumber, false);
                         }//Opcode 1 is for making a move
                         else if (dataFromClient[0] == '1')
                         {
                             dataFromClient = dataFromClient.TrimStart('1');
                             Console.WriteLine("From Client - " + _clientNumber + ": " + dataFromClient);
                         }
-                        Networkhandler.SendString(dataFromClient, _clientNumber, true);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.ToString());
                         if (_clientSocket.Connected == false)
                         {
+                            Console.WriteLine("removing client");
+                            ClientList.Remove(_clientSocket);
                             return;
                         }
 

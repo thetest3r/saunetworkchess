@@ -8,6 +8,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using Chess;
 
 namespace Checkmate_
 {
@@ -15,6 +17,7 @@ namespace Checkmate_
     {
         private TcpClient server;
         static NetworkStream stream;
+        private ListBox parentListBox;
 
         public void ConnecttoServer()
         {
@@ -22,8 +25,13 @@ namespace Checkmate_
             //Needs the I.P. Address of our samuel server
             server.Connect("127.0.0.1", 1991);
             stream = server.GetStream();
-            //var thread = new Thread(ListenforServer);
-            //thread.Start();
+            var thread = new Thread(ListenforServer);
+            thread.Start();
+        }
+        public void ConnectForm(ref ListBox form)
+        {
+            parentListBox = form;
+            return;
         }
         public void UpdateClientList()
         {
@@ -40,14 +48,30 @@ namespace Checkmate_
 
         public void ListenforServer()
         {
-            while (true)
+            try
             {
-                Console.Write("I'm listening");
-                var bytes = new byte[server.ReceiveBufferSize];
-                stream.Read(bytes, 0, server.ReceiveBufferSize);
-                string msg = Encoding.ASCII.GetString(bytes);
-                int index = msg.IndexOf("$") > 0 ? msg.IndexOf("$")
-                    : msg.IndexOf('\0');
+                while (true)
+                {
+                    var bytes = new byte[server.ReceiveBufferSize];
+                    stream.Read(bytes, 0, server.ReceiveBufferSize);
+                    string msg = Encoding.ASCII.GetString(bytes);
+                    int index = msg.IndexOf("$") > 0 ? msg.IndexOf("$")
+                        : msg.IndexOf('\0');
+                    if (msg[0] == '0')
+                    {
+                        MessageBox.Show(msg);
+                    }
+                    if(msg[0]== '6')
+                    {
+                        msg = msg.TrimStart('6');
+                        parentListBox.Items.Add(msg);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("You've been disconnected.");
+                return;
             }
             return;
         }

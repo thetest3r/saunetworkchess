@@ -117,11 +117,17 @@ namespace Chess
             InitializeComponent();
             client = new CheckmateClient();
             client.ConnecttoServer();
+            client.ConnectForm(ref this.listBox1);
             cells = GetBoard();
             //CONNECT TO THE SERVER
             this.Controls.Add(cells);
             // Reference: http://msdn.microsoft.com/en-us/library/system.windows.forms.control.controlcollection.clear(v=vs.110).aspx (to clear form)
    
+        }
+        public void addtoList(string name)
+        {
+            this.listBox1.Items.Add(name);
+            return;
         }
         private TableLayoutPanel GetBoard()
         {
@@ -191,6 +197,7 @@ namespace Chess
         {
 
         }
+
 
     }
 }
