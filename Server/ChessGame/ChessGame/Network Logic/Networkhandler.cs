@@ -31,24 +31,27 @@ namespace ChessGame.Network_Logic
                 Console.WriteLine("player" + i.ToString() + " joined the lobby.");
                 var client = new HandleClient();
                 client.StartClient(clientSocket, "player" + i.ToString());
-                SendMessage("6","player"+i.ToString());
-                UpdateClientsList(clientSocket);
+                UpdateClientsList();
                 i++;
             }
         }
 
-        public static void UpdateClientsList(TcpClient client)
+        public static void UpdateClientsList()
         {
-            int i = 1;
-            var broadcastSocket = client;
-            NetworkStream broadcastStream = broadcastSocket.GetStream();
+            string list = "6";
+            foreach(DictionaryEntry item in ClientList)
+            {
+                int i = 0;
+                list += "player" + i + "*";
+                    i++;
+            }
             foreach (DictionaryEntry item in ClientList)
             {
-                byte[] broadcastBytes = Encoding.ASCII.GetBytes("6player"+ i);
+                var broadcastSocket = (TcpClient)item.Value;
+                NetworkStream broadcastStream = broadcastSocket.GetStream();
+                byte[] broadcastBytes = Encoding.ASCII.GetBytes(list);
                 broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
                 broadcastStream.Flush();
-                System.Threading.Thread.Sleep(1);
-                i++;
             }
         }
         public static void SendString(string msg, string uname, bool flag)

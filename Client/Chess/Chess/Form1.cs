@@ -116,8 +116,9 @@ namespace Chess
             //ImageList1.Images.Add(Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\white_pawn.png"));
             InitializeComponent();
             client = new CheckmateClient();
-            client.ConnecttoServer();
             client.ConnectForm(ref this.listBox1);
+            client.ConnecttoServer();
+            
             cells = GetBoard();
             //CONNECT TO THE SERVER
             this.Controls.Add(cells);

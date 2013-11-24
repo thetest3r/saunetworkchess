@@ -57,20 +57,34 @@ namespace Checkmate_
                     string msg = Encoding.ASCII.GetString(bytes);
                     int index = msg.IndexOf("$") > 0 ? msg.IndexOf("$")
                         : msg.IndexOf('\0');
+                    // 0 is a message
                     if (msg[0] == '0')
                     {
                         MessageBox.Show(msg);
                     }
-                    if(msg[0]== '6')
+                        // 6 is to send a players name and add it to the listbox
+                    else if(msg[0]== '6')
                     {
                         msg = msg.TrimStart('6');
-                        parentListBox.Items.Add(msg);
+                        while (msg.Length > 0)
+                        {
+                            string player = "";
+                            for (int i = 0; i < msg.Length; i++)
+                            {
+                                if (msg[i] != '*')
+                                    player += msg[i];
+                                else
+                                    msg = msg.TrimStart('*');
+                            }
+                            //parentListBox.Items.Add(player);
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("You've been disconnected.");
+                MessageBox.Show(ex.ToString());
                 return;
             }
             return;
