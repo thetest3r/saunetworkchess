@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Checkmate_;
 using System.Net.NetworkInformation;
+using System.Net;
 //using System.Windows.Forms.ImageList;
 //http://www.mindstick.com/Articles/73eb92cb-7e33-4de9-bf52-4bf5314f6cda/?Displaying%20an%20array%20of%20images%20in%20pictureBox%20C //Reference this
 namespace Chess
@@ -170,11 +171,13 @@ namespace Chess
             int[] rowCol;
             if (prevClickedCell == null)
             {
+                updateNetworkInfo();
                 prevClickedCell = (Cell)sender;
                 temp.BackColor = System.Drawing.Color.Blue;
             }
             else if (prevClickedCell == temp)
             {
+                updateNetworkInfo();
                 rowCol = prevClickedCell.ToInt();
                 prevClickedCell = null;
                 temp.BackColor = (rowCol[0] % 2 == rowCol[1] % 2) ? Color.Black : Color.DarkGray;
@@ -182,6 +185,7 @@ namespace Chess
             }
             else //Needs more conditions
             {
+                updateNetworkInfo();
                 rowCol = prevClickedCell.ToInt();
                 listBox1.Items.Add(GetLocation(rowCol[1],rowCol[0]));
                 sendInfo = Convert.ToString((int)GetLocation(rowCol[0], rowCol[1])) + "|";
@@ -213,12 +217,38 @@ namespace Chess
 
         private void updateNetworkInfo()
         {
+            //Ping Reference http://stackoverflow.com/questions/1281176/making-a-ping-inside-of-my-c-sharp-application
             Ping pingTime = new Ping();
-            PingReply pingReply = pingTime.Send("samuel.cs.southern.edu");
+            PingReply pingReply;
+            try
+            {
+                 pingReply = pingTime.Send("samuel.cs.southern.edu");
+                //IPAddresses Reference http://stackoverflow.com/questions/5271724/get-all-ip-addresses-on-machine
+            }
+            catch (PingException ex)
+            {
+                networkingLabel.Text =
+                    "You are not connected. \n" +
+                    "Please check your \n" +
+                    "internet connection \n";
+                return;
+            }
+            pingReply = pingTime.Send("samuel.cs.southern.edu");
+
+            String strHostName = Dns.GetHostName();
+            IPHostEntry ipHostEntry = Dns.GetHostByName(strHostName);
+
+            strHostName = null; //Reusing the string
+            foreach (IPAddress ipaddress in ipHostEntry.AddressList)
+            {
+                strHostName += ipaddress.ToString() + "  ";
+            }
+
             networkingLabel.Text =
-                "Connected to samuel.cs.southern.edu \n" +
-                "RTT Time:" + pingReply.RoundtripTime.ToString() + "ms \n"
-                ;
+                "Connected to: \n" + 
+                "samuel.cs.southern.edu \n \n" +
+                "RTT Time:" + pingReply.RoundtripTime.ToString() + "ms \n \n"+
+                "Local IP:" + strHostName;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
