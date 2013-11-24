@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Chess;
+using System.ComponentModel;
 
 namespace Checkmate_
 {
@@ -17,21 +18,34 @@ namespace Checkmate_
     {
         private TcpClient server;
         static NetworkStream stream;
-        private ListBox parentListBox;
+        private FormThread form;
 
+        public CheckmateClient()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            form = new FormThread();
+            ThreadStart ts = new ThreadStart(form.StartUiThread);
+            Thread t = new Thread(ts);
+            t.Start();
+        }
         public void ConnecttoServer()
         {
             server = new TcpClient();
             //Needs the I.P. Address of our samuel server
-            server.Connect("127.0.0.1", 1991);
+            
+            try
+            {
+                server.Connect("127.0.0.1", 1991);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Cannot connect to server");
+                return;
+            }
             stream = server.GetStream();
             var thread = new Thread(ListenforServer);
             thread.Start();
-        }
-        public void ConnectForm(ref ListBox form)
-        {
-            parentListBox = form;
-            return;
         }
         public void UpdateClientList()
         {
@@ -57,27 +71,35 @@ namespace Checkmate_
                     string msg = Encoding.ASCII.GetString(bytes);
                     int index = msg.IndexOf("$") > 0 ? msg.IndexOf("$")
                         : msg.IndexOf('\0');
-                    // 0 is a message
-                    if (msg[0] == '0')
+                    // 2 is a reply from a move form(1|bool)
+                    if (msg[0] == '2')
                     {
                         MessageBox.Show(msg);
                     }
-                        // 6 is to send a players name and add it to the listbox
-                    else if(msg[0]== '6')
+                        // 3 is when the other player moves form(3|int|int)
+                    else if(msg[0]== '3')
                     {
-                        msg = msg.TrimStart('6');
-                        while (msg.Length > 0)
-                        {
-                            string player = "";
-                            for (int i = 0; i < msg.Length; i++)
-                            {
-                                if (msg[i] != '*')
-                                    player += msg[i];
-                                else
-                                    msg = msg.TrimStart('*');
-                            }
-                            //parentListBox.Items.Add(player);
-                        }
+
+                    }
+                        // 4 declares check form(4|int|bool)
+                    else if (msg[0] == '4')
+                    {
+
+                    }
+                        // 5 player wins - 0 for white 1 for black form(5|bool)
+                    else if (msg[0] == '5')
+                    {
+
+                    }
+                        // 6 for end game form(6|)
+                    else if (msg[0] == '6')
+                    {
+
+                    }
+                        // 7 is to begin a game form(7|bool)
+                    else if (msg[0] == '7')
+                    {
+
                     }
                 }
             }
@@ -88,6 +110,17 @@ namespace Checkmate_
                 return;
             }
             return;
+        }
+    }
+        public class FormThread
+           {
+            Form1 _form;
+            public FormThread(){
+
+            }
+     public void StartUiThread(){
+         _form = new Form1();
+        Application.Run(_form);
         }
     }
 }
