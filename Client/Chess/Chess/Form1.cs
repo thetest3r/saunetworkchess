@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Checkmate_;
+using System.Net.NetworkInformation;
 //using System.Windows.Forms.ImageList;
 //http://www.mindstick.com/Articles/73eb92cb-7e33-4de9-bf52-4bf5314f6cda/?Displaying%20an%20array%20of%20images%20in%20pictureBox%20C //Reference this
 namespace Chess
 {
     public partial class Form1 : Form
     {
+        public enum Locations { a1, a2, a3, a4, a5, a6, a7, a8, b1, b2, b3, b4, b5, b6, b7, b8, c1, c2, c3, c4, c5, c6, c7, c8, d1, d2, d3, d4, d5, d6, d7, d8, e1, e2, e3, e4, e5, e6, e7, e8, f1, f2, f3, f4, f5, f6, f7, f8, g1, g2, g3, g4, g5, g6, g7, g8, h1, h2, h3, h4, h5, h6, h7, h8, invalid };
         private TableLayoutPanel cells;
         private Cell prevClickedCell = null;
         private bool prevTrack = false;
@@ -21,7 +23,7 @@ namespace Chess
             public static readonly System.Drawing.Size CellSize = new System.Drawing.Size(75, 75);
             private static List<Image> chessPieceList = new List<Image>();
             private enum pieces { WCastle, WKnight, WBishop, WKing, WQueen, WPawn, Blank, BCastle, BKnight, BBishop, BKing, BQueen, BPawn };
-            private static  pieces[,] boardArray = new pieces[8, 8] 
+            private static pieces[,] boardArray = new pieces[8, 8] 
             {
             {pieces.BCastle,pieces.BKnight,pieces.BBishop, pieces.BKing, pieces.BQueen, pieces.BBishop, pieces.BKnight, pieces.BCastle},
             {pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn},
@@ -41,7 +43,7 @@ namespace Chess
             {
                 if (!isImageLoaded)
                 {
-                    loadPNG(); 
+                    loadPNG();
                     isImageLoaded = true;
                 }
                 this.row = row; this.col = col;
@@ -51,6 +53,11 @@ namespace Chess
                 this.Image = loadPiece(row, col);
             }
             public override string ToString() { return "Cell(" + row + "," + col + ")"; }
+            public int[] ToInt()
+            {
+                int[] x = new int[2] { row, col };
+                return x;
+            }
             private static Image loadPiece(int row, int col)
             {
                 switch (boardArray[row, col])
@@ -115,15 +122,15 @@ namespace Chess
             //ImageList1.ImageSize = new Size(50, 50);
             //ImageList1.Images.Add(Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\white_pawn.png"));
             InitializeComponent();
-            client = new CheckmateClient();
-            client.ConnectForm(ref this.listBox1);
-            client.ConnecttoServer();
-            
+            //Client = new CheckmateClient();
+            //client.ConnectForm(ref this.listBox1);
+            //client.ConnecttoServer();
+
             cells = GetBoard();
             //CONNECT TO THE SERVER
             this.Controls.Add(cells);
             // Reference: http://msdn.microsoft.com/en-us/library/system.windows.forms.control.controlcollection.clear(v=vs.110).aspx (to clear form)
-   
+
         }
         public void addtoList(string name)
         {
@@ -148,40 +155,72 @@ namespace Chess
             }
             b.Padding = new Padding(0);
             b.Size = new System.Drawing.Size(b.ColumnCount * Cell.CellSize.Width, b.RowCount * Cell.CellSize.Height);
-            //Graphics white_pawn = Graphics.FromImage(chessPieceList[0]);
-            //white_pawn.DrawImage(chessPieceList[0], new Point(0, 0));
-            //ImageList1.Draw(theGraphics, new Point(85, 85), 1);
-            //Application.DoEvents();
+            /*Graphics white_pawn = Graphics.FromImage(chessPieceList[0]);
+            *white_pawn.DrawImage(chessPieceList[0], new Point(0, 0));
+            *ImageList1.Draw(theGraphics, new Point(85, 85), 1);
+            *Application.DoEvents();
+             * */
             return b;
         }
         private void cell_Click(object sender, EventArgs e)
         {
             Cell temp = (Cell)sender;
+            string sendInfo;
+            IPAddrBox.Text = "CSP" + temp.ToString();
+            int[] rowCol;
             if (prevClickedCell == null)
             {
                 prevClickedCell = (Cell)sender;
+                temp.BackColor = System.Drawing.Color.Blue;
             }
             else if (prevClickedCell == temp)
             {
-                IPAddrBox.Text = "Invalid Move!";
+                rowCol = prevClickedCell.ToInt();
+                prevClickedCell = null;
+                temp.BackColor = (rowCol[0] % 2 == rowCol[1] % 2) ? Color.Black : Color.DarkGray;
                 return;
             }
             else //Needs more conditions
             {
+                rowCol = prevClickedCell.ToInt();
+                listBox1.Items.Add(GetLocation(rowCol[1],rowCol[0]));
+                sendInfo = Convert.ToString((int)GetLocation(rowCol[0], rowCol[1])) + "|";
+                rowCol = temp.ToInt();
+                sendInfo += Convert.ToString((int)GetLocation(rowCol[0], rowCol[1]));
+                listBox1.Items.Add(GetLocation(rowCol[1], rowCol[0]));
+                listBox1.Items.Add(sendInfo);
+                /*
+                 *Locations x = Locations.a1;
+                  string y = Convert.ToString((int) x) + "|";
+                 */
+                /*
+                rowCol = prevClickedCell.ToInt();
                 temp.Image = prevClickedCell.Image;
+                prevClickedCell.BackColor = (rowCol[0] % 2 == rowCol[1] % 2) ? Color.Black : Color.DarkGray;
                 prevClickedCell.Image = null;
                 prevClickedCell = null;
+                 * */
             }
-                //
+            //
             //if (!prevTrack)// prevTrack is 0
             //    prevClickedCell = (Cell)sender;
             //System.Diagnostics.Debug.WriteLine("Click: " + cell);
             string i = sender.ToString();
-            IPAddrBox.Text = "Hello World" + i;
-            client.SendtoServer("0", "I'm clicking");
+            //IPAddrBox.Text = "Hello World" + i;
+            //client.SendtoServer("0", "I'm clicking");
             //Reference to update picture inside picture box http://stackoverflow.com/questions/9030622/how-to-refresh-picturebox
         }
-        
+
+        private void updateNetworkInfo()
+        {
+            Ping pingTime = new Ping();
+            PingReply pingReply = pingTime.Send("samuel.cs.southern.edu");
+            networkingLabel.Text =
+                "Connected to samuel.cs.southern.edu \n" +
+                "RTT Time:" + pingReply.RoundtripTime.ToString() + "ms \n"
+                ;
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
         }
@@ -191,14 +230,204 @@ namespace Chess
             int i = int.Parse(IPAddrBox.Text);
             i += 1;
             IPAddrBox.Text = i.ToString();
-
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+        private Locations GetLocation(int x, int y)
+        {
+            // X is the column
+            // Y is the row
+            switch (x)
+            {
+                case 0:
+                    switch (y)
+                    {
+                        case 7:
+                            return Locations.a1;
+                        case 6:
+                            return Locations.a2;
+                        case 5:
+                            return Locations.a3;
+                        case 4:
+                            return Locations.a4;
+                        case 3:
+                            return Locations.a5;
+                        case 2:
+                            return Locations.a6;
+                        case 1:
+                            return Locations.a7;
+                        case 0:
+                            return Locations.a8;
+                        default:
+                            return Locations.invalid;
+                    }
+                case 1:
+                    switch (y)
+                    {
+                        case 7:
+                            return Locations.b1;
+                        case 6:
+                            return Locations.b2;
+                        case 5:
+                            return Locations.b3;
+                        case 4:
+                            return Locations.b4;
+                        case 3:
+                            return Locations.b5;
+                        case 2:
+                            return Locations.b6;
+                        case 1:
+                            return Locations.b7;
+                        case 0:
+                            return Locations.b8;
+                        default:
+                            return Locations.invalid;
 
+                    }
+                case 2:
+                    switch (y)
+                    {
+                        case 7:
+                            return Locations.c1;
+                        case 6:
+                            return Locations.c2;
+                        case 5:
+                            return Locations.c3;
+                        case 4:
+                            return Locations.c4;
+                        case 3:
+                            return Locations.c5;
+                        case 2:
+                            return Locations.c6;
+                        case 1:
+                            return Locations.c7;
+                        case 0:
+                            return Locations.c8;
+                        default:
+                            return Locations.invalid;
 
+                    }
+                case 3:
+                    switch (y)
+                    {
+                        case 7:
+                            return Locations.d1;
+                        case 6:
+                            return Locations.d2;
+                        case 5:
+                            return Locations.d3;
+                        case 4:
+                            return Locations.d4;
+                        case 3:
+                            return Locations.d5;
+                        case 2:
+                            return Locations.d6;
+                        case 1:
+                            return Locations.d7;
+                        case 0:
+                            return Locations.d8;
+                        default:
+                            return Locations.invalid;
+
+                    }
+                case 4:
+                    switch (y)
+                    {
+                        case 7:
+                            return Locations.e1;
+                        case 6:
+                            return Locations.e2;
+                        case 5:
+                            return Locations.e3;
+                        case 4:
+                            return Locations.e4;
+                        case 3:
+                            return Locations.e5;
+                        case 2:
+                            return Locations.e6;
+                        case 1:
+                            return Locations.e7;
+                        case 0:
+                            return Locations.e8;
+                        default:
+                            return Locations.invalid;
+                    }
+                case 5:
+                    switch (y)
+                    {
+                        case 7:
+                            return Locations.f1;
+                        case 6:
+                            return Locations.f2;
+                        case 5:
+                            return Locations.f3;
+                        case 4:
+                            return Locations.f4;
+                        case 3:
+                            return Locations.f5;
+                        case 2:
+                            return Locations.f6;
+                        case 1:
+                            return Locations.f7;
+                        case 0:
+                            return Locations.f8;
+                        default:
+                            return Locations.invalid;
+
+                    };
+                case 6:
+                    switch (y)
+                    {
+                        case 7:
+                            return Locations.g1;
+                        case 6:
+                            return Locations.g2;
+                        case 5:
+                            return Locations.g3;
+                        case 4:
+                            return Locations.g4;
+                        case 3:
+                            return Locations.g5;
+                        case 2:
+                            return Locations.g6;
+                        case 1:
+                            return Locations.g7;
+                        case 0:
+                            return Locations.g8;
+                        default:
+                            return Locations.invalid;
+
+                    }
+                case 7:
+                    switch (y)
+                    {
+                        case 7:
+                            return Locations.h1;
+                        case 6:
+                            return Locations.h2;
+                        case 5:
+                            return Locations.h3;
+                        case 4:
+                            return Locations.h4;
+                        case 3:
+                            return Locations.h5;
+                        case 2:
+                            return Locations.h6;
+                        case 1:
+                            return Locations.h7;
+                        case 0:
+                            return Locations.h8;
+                        default:
+                            return Locations.invalid;
+                    }
+                default:
+                    return Locations.invalid;
+
+            }
+
+        }
     }
 }

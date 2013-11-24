@@ -31,6 +31,7 @@
             this.IPAddrBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.networkingLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // IPAddrBox
@@ -61,11 +62,21 @@
             this.listBox1.TabIndex = 2;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
+            // networkingLabel
+            // 
+            this.networkingLabel.AutoSize = true;
+            this.networkingLabel.Location = new System.Drawing.Point(602, 245);
+            this.networkingLabel.Name = "networkingLabel";
+            this.networkingLabel.Size = new System.Drawing.Size(119, 13);
+            this.networkingLabel.TabIndex = 3;
+            this.networkingLabel.Text = "Networking Information:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 711);
+            this.Controls.Add(this.networkingLabel);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.IPAddrBox);
@@ -81,6 +92,7 @@
         private System.Windows.Forms.TextBox IPAddrBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label networkingLabel;
     }
 }
 
