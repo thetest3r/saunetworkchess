@@ -176,6 +176,8 @@ namespace Chess
             }
             else //Needs more conditions
             {
+                rowCol = prevClickedCell.ToInt();
+                prevClickedCell.BackColor = (rowCol[0] % 2 == rowCol[1] % 2) ? Color.Black : Color.DarkGray;
                 updateNetworkInfo();
                 rowCol = prevClickedCell.ToInt();
                 listBox1.Items.Add(GetLocation(rowCol[1],rowCol[0]));
