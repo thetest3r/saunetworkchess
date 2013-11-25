@@ -19,6 +19,7 @@ namespace Chess
         private Cell prevClickedCell = null;
         private Cell currentClickedCell = null;
         private bool prevTrack = false;
+        public String protocolName;
         class Cell : PictureBox
         {
             public static readonly System.Drawing.Size CellSize = new System.Drawing.Size(75, 75);
@@ -243,8 +244,10 @@ namespace Chess
             networkingLabel.Text =
                 "Connected to: \n" + 
                 "samuel.cs.southern.edu \n \n" +
-                "RTT Time:" + pingReply.RoundtripTime.ToString() + "ms \n \n"+
-                "Local IP:" + strHostName;
+                "RTT Time: " + pingReply.RoundtripTime.ToString() + "ms \n \n"+
+                "Local IP: " + strHostName + "\n" +
+                "Protocol: " + protocolName + "n";
+            //Add whichi protocols is using
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -253,6 +256,9 @@ namespace Chess
 
         public void validMove()
         {
+            Cell temp = prevClickedCell;
+            currentClickedCell.Image = temp.Image;
+            prevClickedCell.Image = null;
 
         }
         private void button1_Click(object sender, EventArgs e)
@@ -260,12 +266,6 @@ namespace Chess
             //int i = int.Parse(IPAddrBox.Text);
             //i += 1;
             //IPAddrBox.Text = i.ToString();
-            Cell temp = prevClickedCell;
-            prevClickedCell = currentClickedCell;
-            currentClickedCell = prevClickedCell;
-            
-
-            
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
