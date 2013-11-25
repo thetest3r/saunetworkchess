@@ -17,6 +17,7 @@ namespace Chess
         public enum Locations { a1, a2, a3, a4, a5, a6, a7, a8, b1, b2, b3, b4, b5, b6, b7, b8, c1, c2, c3, c4, c5, c6, c7, c8, d1, d2, d3, d4, d5, d6, d7, d8, e1, e2, e3, e4, e5, e6, e7, e8, f1, f2, f3, f4, f5, f6, f7, f8, g1, g2, g3, g4, g5, g6, g7, g8, h1, h2, h3, h4, h5, h6, h7, h8, invalid };
         private TableLayoutPanel cells;
         private Cell prevClickedCell = null;
+        private Cell currentClickedCell = null;
         private bool prevTrack = false;
         class Cell : PictureBox
         {
@@ -176,6 +177,7 @@ namespace Chess
             }
             else //Needs more conditions
             {
+                
                 rowCol = prevClickedCell.ToInt();
                 prevClickedCell.BackColor = (rowCol[0] % 2 == rowCol[1] % 2) ? Color.Black : Color.DarkGray;
                 updateNetworkInfo();
@@ -186,6 +188,7 @@ namespace Chess
                 sendInfo += Convert.ToString((int)GetLocation(rowCol[0], rowCol[1]));
                 listBox1.Items.Add(GetLocation(rowCol[1], rowCol[0]));
                 listBox1.Items.Add(sendInfo);
+                currentClickedCell = temp;
                 /*
                  *Locations x = Locations.a1;
                   string y = Convert.ToString((int) x) + "|";
@@ -197,6 +200,7 @@ namespace Chess
                 prevClickedCell.Image = null;
                 prevClickedCell = null;
                  * */
+
             }
             //
             //if (!prevTrack)// prevTrack is 0
@@ -247,16 +251,31 @@ namespace Chess
         {
         }
 
+        public void validMove()
+        {
+
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            int i = int.Parse(IPAddrBox.Text);
-            i += 1;
-            IPAddrBox.Text = i.ToString();
+            //int i = int.Parse(IPAddrBox.Text);
+            //i += 1;
+            //IPAddrBox.Text = i.ToString();
+            Cell temp = prevClickedCell;
+            prevClickedCell = currentClickedCell;
+            currentClickedCell = prevClickedCell;
+            
+
+            
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        public void IpBoxMessage(string msg)
+        {
+            IPAddrBox.Text = msg;
         }
         private Locations GetLocation(int x, int y)
         {

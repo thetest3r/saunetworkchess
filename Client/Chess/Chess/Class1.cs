@@ -40,7 +40,6 @@ namespace Checkmate_
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Cannot connect to server");
                 return;
             }
             stream = server.GetStream();
@@ -74,7 +73,17 @@ namespace Checkmate_
                     // 2 is a reply from a move form(1|bool)
                     if (msg[0] == '2')
                     {
-                        MessageBox.Show(msg);
+                        if (msg[1] == '0')
+                        {
+                            form._form.IpBoxMessage("Invalid Move");
+
+                        }
+                        else if (msg[1] == '1')
+                        {
+                            form._form.IpBoxMessage("Move Accepted");
+                        }
+                        else
+                            MessageBox.Show("OpCode 2 - Reply not recognized");
                     }
                         // 3 is when the other player moves form(3|int|int)
                     else if(msg[0]== '3')
@@ -114,7 +123,7 @@ namespace Checkmate_
     }
         public class FormThread
            {
-            Form1 _form;
+            public Form1 _form;
             public FormThread(){
 
             }
