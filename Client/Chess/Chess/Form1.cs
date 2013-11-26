@@ -20,6 +20,8 @@ namespace Chess
         private Cell currentClickedCell = null;
         private bool prevTrack = false;
         public String protocolName;
+        private static  Cell[] cellDuplicate = new Cell[64];
+
         class Cell : PictureBox
         {
             public static readonly System.Drawing.Size CellSize = new System.Drawing.Size(75, 75);
@@ -37,6 +39,7 @@ namespace Chess
             {pieces.WCastle,pieces.WKnight,pieces.WBishop, pieces.WKing, pieces.WQueen, pieces.WBishop, pieces.WKnight, pieces.WCastle}
             };
             private bool isImageLoaded = false;
+            private static int cellID = 0;
             //Temp image that is loaded
             //Image temp_piece = Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\White_Pawn.png");
             public readonly int row, col;
@@ -53,6 +56,9 @@ namespace Chess
                 this.BackColor = (col % 2 == row % 2) ? Color.Black : Color.DarkGray;
                 this.SizeMode = PictureBoxSizeMode.StretchImage;
                 this.Image = loadPiece(row, col);
+
+                cellDuplicate[cellID] = this;
+                cellID++;
             }
             public override string ToString() { return "Cell(" + row + "," + col + ")"; }
             public int[] ToInt()
@@ -266,6 +272,8 @@ namespace Chess
             //int i = int.Parse(IPAddrBox.Text);
             //i += 1;
             //IPAddrBox.Text = i.ToString();
+            
+            cellDuplicate[0].Image = cellDuplicate[4].Image;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
