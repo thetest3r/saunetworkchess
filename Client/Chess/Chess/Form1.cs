@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using Checkmate_;
 using System.Net.NetworkInformation;
@@ -21,6 +18,7 @@ namespace Chess
         private bool prevTrack = false;
         public String protocolName;
         private static  Cell[] cellDuplicate = new Cell[64];
+       public CheckmateClient parentClient = null;
 
         class Cell : PictureBox
         {
@@ -132,7 +130,6 @@ namespace Chess
             InitializeComponent();
             
             cells = GetBoard();
-            //CONNECT TO THE SERVER
             this.Controls.Add(cells);
             // Reference: http://msdn.microsoft.com/en-us/library/system.windows.forms.control.controlcollection.clear(v=vs.110).aspx (to clear form)
 
@@ -230,6 +227,7 @@ namespace Chess
             }
             catch (PingException ex)
             {
+                Console.WriteLine(ex);
                 networkingLabel.Text =
                     "You are not connected. \n" +
                     "Please check your \n" +
@@ -239,7 +237,8 @@ namespace Chess
             pingReply = pingTime.Send("samuel.cs.southern.edu");
 
             String strHostName = Dns.GetHostName();
-            IPHostEntry ipHostEntry = Dns.GetHostByName(strHostName);
+            //IPHostEntry ipHostEntry = Dns.GetHostByName(strHostName);
+            IPHostEntry ipHostEntry = Dns.GetHostEntry(strHostName);
 
             strHostName = null; //Reusing the string
             foreach (IPAddress ipaddress in ipHostEntry.AddressList)
@@ -259,21 +258,12 @@ namespace Chess
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
         }
-
-        public void validMove()
-        {
-            Cell temp = prevClickedCell;
-            currentClickedCell.Image = temp.Image;
-            prevClickedCell.Image = null;
-
-        }
         private void button1_Click(object sender, EventArgs e)
         {
             //int i = int.Parse(IPAddrBox.Text);
             //i += 1;
             //IPAddrBox.Text = i.ToString();
-            
-            cellDuplicate[0].Image = cellDuplicate[4].Image;
+            parentClient.ConnecttoServer();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -284,6 +274,26 @@ namespace Chess
         public void IpBoxMessage(string msg)
         {
             IPAddrBox.Text = msg;
+            return;
+        }
+        public void validMove()
+        {
+            Cell temp = prevClickedCell;
+            currentClickedCell.Image = temp.Image;
+            prevClickedCell.Image = null;
+
+        }
+        public void oppenentsMove(int currentPos, int newPos)
+        {
+            Cell temp = cellDuplicate[newPos];
+            cellDuplicate[newPos].Image = cellDuplicate[currentPos].Image;
+            cellDuplicate[currentPos].Image = null;
+            return;
+        }
+
+        public void attachParentNetwork(CheckmateClient parent)
+        {
+            this.parentClient = parent;
         }
         private Locations GetLocation(int x, int y)
         {

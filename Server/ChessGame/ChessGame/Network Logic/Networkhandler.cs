@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using ChessGame.Network_Logic;
 
 namespace ChessGame.Network_Logic
 {
@@ -33,29 +34,10 @@ namespace ChessGame.Network_Logic
                 Console.WriteLine("player" + i.ToString() + " joined the lobby.");
                 var client = new HandleClient();
                 client.StartClient(clientSocket, "player" + i.ToString());
-                UpdateClientsList();
                 i++;
             }
         }
 
-        public static void UpdateClientsList()
-        {
-            string list = "6";
-            foreach(DictionaryEntry item in ClientList)
-            {
-                int i = 0;
-                list += "player" + i + "*";
-                    i++;
-            }
-            foreach (DictionaryEntry item in ClientList)
-            {
-                var broadcastSocket = (TcpClient)item.Value;
-                NetworkStream broadcastStream = broadcastSocket.GetStream();
-                byte[] broadcastBytes = Encoding.ASCII.GetBytes(list);
-                broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
-                broadcastStream.Flush();
-            }
-        }
         public static void SendString(string msg, string uname, bool flag)
         {
             foreach (DictionaryEntry item in ClientList)
@@ -64,19 +46,6 @@ namespace ChessGame.Network_Logic
                 NetworkStream broadcastStream = broadcastSocket.GetStream();
                 byte[] broadcastBytes = flag ? Encoding.ASCII.GetBytes(uname + " says: " + msg)
                     : Encoding.ASCII.GetBytes(msg);
-                broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
-                broadcastStream.Flush();
-            }
-        }
-
-        public static void SendMessage(string opCode, string msg)
-        {
-            string message = opCode + msg;
-            foreach (DictionaryEntry item in ClientList)
-            {
-                var broadcastSocket = (TcpClient)item.Value;
-                NetworkStream broadcastStream = broadcastSocket.GetStream();
-                byte[] broadcastBytes = Encoding.ASCII.GetBytes(message);
                 broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
                 broadcastStream.Flush();
             }

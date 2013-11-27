@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Checkmate_;
 
 namespace Chess
@@ -19,7 +15,6 @@ namespace Chess
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
             CheckmateClient Client = new CheckmateClient();
-            Client.ConnecttoServer();
 
         }
     }
