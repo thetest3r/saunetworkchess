@@ -535,7 +535,7 @@ namespace ChessGame.GameLogic
                         if (Oy == 6)
                         {
                             temporary = GetLocation(Ox, 4);
-                            bool isJumpedSpotOccupied = IsSquareOccupied(GetLocation(Ox, 6));
+                            bool isJumpedSpotOccupied = IsSquareOccupied(GetLocation(Ox, 5));
                             if (!isJumpedSpotOccupied)
                             {
                                 list.Add(temporary);
@@ -588,7 +588,7 @@ namespace ChessGame.GameLogic
                         if (Oy == 1)
                         {
                             temporary = GetLocation(Ox, 3);
-                            bool isJumpedSpotOccupied = IsSquareOccupied(GetLocation(Ox, 3));
+                            bool isJumpedSpotOccupied = IsSquareOccupied(GetLocation(Ox, 2));
                             if (!isJumpedSpotOccupied)
                             {
                                 list.Add(temporary);
