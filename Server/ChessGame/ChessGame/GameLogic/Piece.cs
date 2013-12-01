@@ -17,6 +17,7 @@ namespace ChessGame.GameLogic
         public Piece(ChessGame.GameLogic.Game.TypeOfPiece t, ChessGame.GameLogic.Game.Team color)
         {
             Type = t;
+            Team = color;
         }
 
         public void Promote()

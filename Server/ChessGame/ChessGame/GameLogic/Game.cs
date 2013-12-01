@@ -13,6 +13,9 @@ namespace ChessGame.GameLogic
         public enum TypeOfPiece { king, queen, rook, knight, bishop, pawn }
         public enum Team { Black, White };
         public TcpClient Player1, Player2;
+
+        private Team WaitingForThisColorToMove;
+
         public int Id
         {
             get;
@@ -25,6 +28,7 @@ namespace ChessGame.GameLogic
             this.Player2 = Player2;
             Id = identification;
             board = new Board();
+            WaitingForThisColorToMove = Team.Black;
         }
 
         void Reset()
@@ -44,6 +48,12 @@ namespace ChessGame.GameLogic
 
         public bool Move(Team t, Locations origin, Locations destination)
         {
+
+            if (WaitingForThisColorToMove != t)
+            {
+                return false;
+            }
+
             if (!board.IsSquareOccupied(origin))
             {
                 return false;
@@ -82,6 +92,18 @@ namespace ChessGame.GameLogic
 
                 default:
                     break;
+            }
+
+            if (successful)
+            {
+                if (WaitingForThisColorToMove == Team.Black)
+                {
+                    WaitingForThisColorToMove = Team.White;
+                }
+                else
+                {
+                    WaitingForThisColorToMove = Team.Black;
+                }
             }
 
 
