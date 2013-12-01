@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using ChessGame.Network_Logic;
-using ChessGame.GameLogic;
 
 namespace ChessGame.Network_Logic
 {
-    
     public class HandleClient
     {
         private ChessGame.GameLogic.Game.Team team;
@@ -39,58 +32,15 @@ namespace ChessGame.Network_Logic
             var thread = new Thread(RecieveInstructions);
             thread.Start();
         }
-        public void replyToMove(bool valid)
-        {
-
-        }
-        public void declareCheck(int location, bool player)
-        {
-
-        }
-        public void playerWins(bool player)
-        {
-
-
-            string msg ="";
-            if (player == true)
-                msg += '1';
-            else
-                msg += '0';
-            //Networkhandler.SendInstruction(4,)
-
-        }
-
-
         public void RecieveInstructions()
             {
-                //var bytesFrom = new byte[16384];
                 int requestCount = 0;
-                //GameLogic.Game g;
-                //bool isP1Turn = false;
-                //for (int i = 0; i < games.Count; i++)
-                //{
-                //    if (games[i].Player1 == playerId)
-                //    {
-                //        isP1Turn = true;
-                //        g = games[i];
-                //    }
-                //}
-                //if (!isP1Turn)
-                //{
-                //    for (int i = 0; i < games.Count; i++)
-                //    {
-                //        if (games[i].Player2 == playerId)
-                //        {
-                //            g = games[i];
-                //        }
-                //    }
-                //}
                 while (true)
                 {
                     try
                     {
                         requestCount += 1;
-                        string dataFromClient = Networkhandler.RecieveString(_clientSocket);
+                        string dataFromClient = NetworkHandler.RecieveString(_clientSocket);
                         //Opcode of 8 is for attempting a move form(8|int|int)
                         if (dataFromClient[0] == '8')
                         {
@@ -132,7 +82,7 @@ namespace ChessGame.Network_Logic
                         if (_clientSocket.Connected == false)
                         {
                             Console.WriteLine("removing client");
-                            //ClientList.Remove(_clientSocket);
+                            NetworkHandler.removeGame(game.Id);
                             return;
                         }
 

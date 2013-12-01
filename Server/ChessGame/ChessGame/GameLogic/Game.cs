@@ -13,13 +13,17 @@ namespace ChessGame.GameLogic
         public enum TypeOfPiece { king, queen, rook, knight, bishop, pawn }
         public enum Team { Black, White };
         public TcpClient Player1, Player2;
+        public int Id
+        {
+            get;
+            set;
+        }
 
-
-        public Game(TcpClient Player1, TcpClient Player2)
+        public Game(TcpClient Player1, TcpClient Player2, int identification)
         {
             this.Player1 = Player1;
             this.Player2 = Player2;
-
+            Id = identification;
         }
 
         void Reset()

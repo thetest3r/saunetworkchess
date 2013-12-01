@@ -17,8 +17,8 @@ namespace Chess
         private Cell currentClickedCell = null;
         private bool prevTrack = false;
         public String protocolName;
-        private static  Cell[] cellDuplicate = new Cell[64];
-       public CheckmateClient parentClient = null;
+        private static Cell[] cellDuplicate = new Cell[64];
+        public CheckmateClient parentClient = null;
 
         class Cell : PictureBox
         {
@@ -128,7 +128,7 @@ namespace Chess
             //ImageList1.ImageSize = new Size(50, 50);
             //ImageList1.Images.Add(Image.FromFile("C:\\Users\\TT3 Productions\\Documents\\Visual Studio 2012\\Projects\\Chess\\Content\\white_pawn.png"));
             InitializeComponent();
-            
+
             cells = GetBoard();
             this.Controls.Add(cells);
             // Reference: http://msdn.microsoft.com/en-us/library/system.windows.forms.control.controlcollection.clear(v=vs.110).aspx (to clear form)
@@ -181,12 +181,12 @@ namespace Chess
             }
             else //Needs more conditions
             {
-                
+
                 rowCol = prevClickedCell.ToInt();
                 prevClickedCell.BackColor = (rowCol[0] % 2 == rowCol[1] % 2) ? Color.Black : Color.DarkGray;
                 //updateNetworkInfo();
                 rowCol = prevClickedCell.ToInt();
-                listBox1.Items.Add(GetLocation(rowCol[1],rowCol[0]));
+                listBox1.Items.Add(GetLocation(rowCol[1], rowCol[0]));
                 sendInfo = Convert.ToString((int)GetLocation(rowCol[0], rowCol[1])) + "|";
                 rowCol = temp.ToInt();
                 sendInfo += Convert.ToString((int)GetLocation(rowCol[0], rowCol[1]));
@@ -226,7 +226,7 @@ namespace Chess
             PingReply pingReply;
             try
             {
-                 pingReply = pingTime.Send("samuel.cs.southern.edu");
+                pingReply = pingTime.Send("samuel.cs.southern.edu");
                 //IPAddresses Reference http://stackoverflow.com/questions/5271724/get-all-ip-addresses-on-machine
             }
             catch (PingException ex)
@@ -251,9 +251,9 @@ namespace Chess
             }
 
             networkingLabel.Text =
-                "Connected to: \n" + 
+                "Connected to: \n" +
                 "samuel.cs.southern.edu \n \n" +
-                "RTT Time: " + pingReply.RoundtripTime.ToString() + "ms \n \n"+
+                "RTT Time: " + pingReply.RoundtripTime.ToString() + "ms \n \n" +
                 "Local IP: " + strHostName + "\n" +
                 "Protocol: " + protocolName + "n";
             //Add whichi protocols is using
@@ -308,198 +308,11 @@ namespace Chess
         {
             // X is the column
             // Y is the row
-            /*
             switch (x)
             {
                 case 0:
                     switch (y)
                     {
-                        case 7:
-                            return Locations.a1;
-                        case 6:
-                            return Locations.a2;
-                        case 5:
-                            return Locations.a3;
-                        case 4:
-                            return Locations.a4;
-                        case 3:
-                            return Locations.a5;
-                        case 2:
-                            return Locations.a6;
-                        case 1:
-                            return Locations.a7;
-                        case 0:
-                            return Locations.a8;
-                        default:
-                            return Locations.invalid;
-                    }
-                case 1:
-                    switch (y)
-                    {
-                        case 7:
-                            return Locations.b1;
-                        case 6:
-                            return Locations.b2;
-                        case 5:
-                            return Locations.b3;
-                        case 4:
-                            return Locations.b4;
-                        case 3:
-                            return Locations.b5;
-                        case 2:
-                            return Locations.b6;
-                        case 1:
-                            return Locations.b7;
-                        case 0:
-                            return Locations.b8;
-                        default:
-                            return Locations.invalid;
-
-                    }
-                case 2:
-                    switch (y)
-                    {
-                        case 7:
-                            return Locations.c1;
-                        case 6:
-                            return Locations.c2;
-                        case 5:
-                            return Locations.c3;
-                        case 4:
-                            return Locations.c4;
-                        case 3:
-                            return Locations.c5;
-                        case 2:
-                            return Locations.c6;
-                        case 1:
-                            return Locations.c7;
-                        case 0:
-                            return Locations.c8;
-                        default:
-                            return Locations.invalid;
-
-                    }
-                case 3:
-                    switch (y)
-                    {
-                        case 7:
-                            return Locations.d1;
-                        case 6:
-                            return Locations.d2;
-                        case 5:
-                            return Locations.d3;
-                        case 4:
-                            return Locations.d4;
-                        case 3:
-                            return Locations.d5;
-                        case 2:
-                            return Locations.d6;
-                        case 1:
-                            return Locations.d7;
-                        case 0:
-                            return Locations.d8;
-                        default:
-                            return Locations.invalid;
-
-                    }
-                case 4:
-                    switch (y)
-                    {
-                        case 7:
-                            return Locations.e1;
-                        case 6:
-                            return Locations.e2;
-                        case 5:
-                            return Locations.e3;
-                        case 4:
-                            return Locations.e4;
-                        case 3:
-                            return Locations.e5;
-                        case 2:
-                            return Locations.e6;
-                        case 1:
-                            return Locations.e7;
-                        case 0:
-                            return Locations.e8;
-                        default:
-                            return Locations.invalid;
-                    }
-                case 5:
-                    switch (y)
-                    {
-                        case 7:
-                            return Locations.f1;
-                        case 6:
-                            return Locations.f2;
-                        case 5:
-                            return Locations.f3;
-                        case 4:
-                            return Locations.f4;
-                        case 3:
-                            return Locations.f5;
-                        case 2:
-                            return Locations.f6;
-                        case 1:
-                            return Locations.f7;
-                        case 0:
-                            return Locations.f8;
-                        default:
-                            return Locations.invalid;
-
-                    };
-                case 6:
-                    switch (y)
-                    {
-                        case 7:
-                            return Locations.g1;
-                        case 6:
-                            return Locations.g2;
-                        case 5:
-                            return Locations.g3;
-                        case 4:
-                            return Locations.g4;
-                        case 3:
-                            return Locations.g5;
-                        case 2:
-                            return Locations.g6;
-                        case 1:
-                            return Locations.g7;
-                        case 0:
-                            return Locations.g8;
-                        default:
-                            return Locations.invalid;
-
-                    }
-                case 7:
-                    switch (y)
-                    {
-                        case 7:
-                            return Locations.h1;
-                        case 6:
-                            return Locations.h2;
-                        case 5:
-                            return Locations.h3;
-                        case 4:
-                            return Locations.h4;
-                        case 3:
-                            return Locations.h5;
-                        case 2:
-                            return Locations.h6;
-                        case 1:
-                            return Locations.h7;
-                        case 0:
-                            return Locations.h8;
-                        default:
-                            return Locations.invalid;
-                    }
-                default:
-                    return Locations.invalid;
-             * */
-               switch (x)
-            {
-                case 0:
-                    switch (y)
-                    {
                         case 0:
                             return Locations.a1;
                         case 1:
@@ -679,18 +492,18 @@ namespace Chess
                         default:
                             return Locations.invalid;
 
-           
+
                     }
                 default:
                     return Locations.invalid;
             }
 
-            }
+        }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             parentClient.ExitApplication();
         }
 
-        }
     }
+}

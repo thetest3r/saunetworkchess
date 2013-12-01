@@ -10,7 +10,7 @@ namespace ChessGame
     {
         static void Main(string[] args)
         {
-            Networkhandler.startListening();
+            NetworkHandler.startListening();
         }
     }
 }
