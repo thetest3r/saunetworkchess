@@ -90,6 +90,7 @@ namespace Checkmate_
                         if (msg[2] == '0')
                         {
                             form._form.IpBoxMessage("Invalid Move");
+                            form._form.resetClickedCells();
 
                         }
                         else if (msg[2] == '1')

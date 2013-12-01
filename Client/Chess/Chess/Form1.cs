@@ -181,19 +181,29 @@ namespace Chess
             }
             else //Needs more conditions
             {
-
+                 
                 rowCol = prevClickedCell.ToInt();
+                var origin = GetLocation(rowCol[1], rowCol[0]);
                 prevClickedCell.BackColor = (rowCol[0] % 2 == rowCol[1] % 2) ? Color.Black : Color.DarkGray;
                 //updateNetworkInfo();
+
                 rowCol = prevClickedCell.ToInt();
-                listBox1.Items.Add(GetLocation(rowCol[1], rowCol[0]));
-                sendInfo = Convert.ToString((int)GetLocation(rowCol[0], rowCol[1])) + "|";
+                listBox1.Items.Add(origin);
+                sendInfo = Convert.ToString((int)origin) + "|";
+
                 rowCol = temp.ToInt();
-                sendInfo += Convert.ToString((int)GetLocation(rowCol[0], rowCol[1]));
-                listBox1.Items.Add(GetLocation(rowCol[1], rowCol[0]));
+                var destination = GetLocation(rowCol[1], rowCol[0]);
+                sendInfo += Convert.ToString((int)destination);
+                listBox1.Items.Add(destination);
+                
                 listBox1.Items.Add(sendInfo);
+                
                 currentClickedCell = temp;
+
+
                 parentClient.SendtoServer(sendInfo);
+
+
                 //IpBoxMessage(sendInfo);
                 //parentClient.SendtoServer(rowCol[0], rowCol[1]);
                 /*
@@ -268,6 +278,7 @@ namespace Chess
             //i += 1;
             //IPAddrBox.Text = i.ToString();
             parentClient.ConnecttoServer();
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -292,11 +303,16 @@ namespace Chess
         }
         public void oppenentsMove(int currentPos, int newPos)
         {
-            IpBoxMessage(currentPos.ToString());
-            IpBoxMessage(newPos.ToString());
-            Cell temp = cellDuplicate[newPos];
-            cellDuplicate[newPos].Image = cellDuplicate[currentPos].Image;
-            cellDuplicate[currentPos].Image = null;
+            int xcurrent, ycurrent, xnewPos, ynewPos;
+            xcurrent = GetLocX((Locations)currentPos);
+            ycurrent = GetLocY((Locations)currentPos);
+
+            xnewPos = GetLocX((Locations)newPos);
+            ynewPos = GetLocY((Locations)newPos);
+
+            Cell temp = cellDuplicate[xnewPos+(ynewPos*8)];
+            cellDuplicate[xnewPos + (ynewPos * 8)].Image = cellDuplicate[xcurrent + (ycurrent * 8)].Image;
+            cellDuplicate[xcurrent + (ycurrent * 8)].Image = null;
             return;
         }
 
@@ -308,26 +324,29 @@ namespace Chess
         {
             // X is the column
             // Y is the row
+            // X is the column
+            // Y is the row
+
             switch (x)
             {
                 case 0:
                     switch (y)
                     {
-                        case 0:
-                            return Locations.a1;
-                        case 1:
-                            return Locations.a2;
-                        case 2:
-                            return Locations.a3;
-                        case 3:
-                            return Locations.a4;
-                        case 4:
-                            return Locations.a5;
-                        case 5:
-                            return Locations.a6;
-                        case 6:
-                            return Locations.a7;
                         case 7:
+                            return Locations.a1;
+                        case 6:
+                            return Locations.a2;
+                        case 5:
+                            return Locations.a3;
+                        case 4:
+                            return Locations.a4;
+                        case 3:
+                            return Locations.a5;
+                        case 2:
+                            return Locations.a6;
+                        case 1:
+                            return Locations.a7;
+                        case 0:
                             return Locations.a8;
                         default:
                             return Locations.invalid;
@@ -335,21 +354,21 @@ namespace Chess
                 case 1:
                     switch (y)
                     {
-                        case 0:
-                            return Locations.b1;
-                        case 1:
-                            return Locations.b2;
-                        case 2:
-                            return Locations.b3;
-                        case 3:
-                            return Locations.b4;
-                        case 4:
-                            return Locations.b5;
-                        case 5:
-                            return Locations.b6;
-                        case 6:
-                            return Locations.b7;
                         case 7:
+                            return Locations.b1;
+                        case 6:
+                            return Locations.b2;
+                        case 5:
+                            return Locations.b3;
+                        case 4:
+                            return Locations.b4;
+                        case 3:
+                            return Locations.b5;
+                        case 2:
+                            return Locations.b6;
+                        case 1:
+                            return Locations.b7;
+                        case 0:
                             return Locations.b8;
                         default:
                             return Locations.invalid;
@@ -358,21 +377,21 @@ namespace Chess
                 case 2:
                     switch (y)
                     {
-                        case 0:
-                            return Locations.c1;
-                        case 1:
-                            return Locations.c2;
-                        case 2:
-                            return Locations.c3;
-                        case 3:
-                            return Locations.c4;
-                        case 4:
-                            return Locations.c5;
-                        case 5:
-                            return Locations.c6;
-                        case 6:
-                            return Locations.c7;
                         case 7:
+                            return Locations.c1;
+                        case 6:
+                            return Locations.c2;
+                        case 5:
+                            return Locations.c3;
+                        case 4:
+                            return Locations.c4;
+                        case 3:
+                            return Locations.c5;
+                        case 2:
+                            return Locations.c6;
+                        case 1:
+                            return Locations.c7;
+                        case 0:
                             return Locations.c8;
                         default:
                             return Locations.invalid;
@@ -381,21 +400,21 @@ namespace Chess
                 case 3:
                     switch (y)
                     {
-                        case 0:
-                            return Locations.d1;
-                        case 1:
-                            return Locations.d2;
-                        case 2:
-                            return Locations.d3;
-                        case 3:
-                            return Locations.d4;
-                        case 4:
-                            return Locations.d5;
-                        case 5:
-                            return Locations.d6;
-                        case 6:
-                            return Locations.d7;
                         case 7:
+                            return Locations.d1;
+                        case 6:
+                            return Locations.d2;
+                        case 5:
+                            return Locations.d3;
+                        case 4:
+                            return Locations.d4;
+                        case 3:
+                            return Locations.d5;
+                        case 2:
+                            return Locations.d6;
+                        case 1:
+                            return Locations.d7;
+                        case 0:
                             return Locations.d8;
                         default:
                             return Locations.invalid;
@@ -404,44 +423,43 @@ namespace Chess
                 case 4:
                     switch (y)
                     {
-                        case 0:
-                            return Locations.e1;
-                        case 1:
-                            return Locations.e2;
-                        case 2:
-                            return Locations.e3;
-                        case 3:
-                            return Locations.e4;
-                        case 4:
-                            return Locations.e5;
-                        case 5:
-                            return Locations.e6;
-                        case 6:
-                            return Locations.e7;
                         case 7:
+                            return Locations.e1;
+                        case 6:
+                            return Locations.e2;
+                        case 5:
+                            return Locations.e3;
+                        case 4:
+                            return Locations.e4;
+                        case 3:
+                            return Locations.e5;
+                        case 2:
+                            return Locations.e6;
+                        case 1:
+                            return Locations.e7;
+                        case 0:
                             return Locations.e8;
                         default:
                             return Locations.invalid;
-
                     }
                 case 5:
                     switch (y)
                     {
-                        case 0:
-                            return Locations.f1;
-                        case 1:
-                            return Locations.f2;
-                        case 2:
-                            return Locations.f3;
-                        case 3:
-                            return Locations.f4;
-                        case 4:
-                            return Locations.f5;
-                        case 5:
-                            return Locations.f6;
-                        case 6:
-                            return Locations.f7;
                         case 7:
+                            return Locations.f1;
+                        case 6:
+                            return Locations.f2;
+                        case 5:
+                            return Locations.f3;
+                        case 4:
+                            return Locations.f4;
+                        case 3:
+                            return Locations.f5;
+                        case 2:
+                            return Locations.f6;
+                        case 1:
+                            return Locations.f7;
+                        case 0:
                             return Locations.f8;
                         default:
                             return Locations.invalid;
@@ -450,21 +468,21 @@ namespace Chess
                 case 6:
                     switch (y)
                     {
-                        case 0:
-                            return Locations.g1;
-                        case 1:
-                            return Locations.g2;
-                        case 2:
-                            return Locations.g3;
-                        case 3:
-                            return Locations.g4;
-                        case 4:
-                            return Locations.g5;
-                        case 5:
-                            return Locations.g6;
-                        case 6:
-                            return Locations.g7;
                         case 7:
+                            return Locations.g1;
+                        case 6:
+                            return Locations.g2;
+                        case 5:
+                            return Locations.g3;
+                        case 4:
+                            return Locations.g4;
+                        case 3:
+                            return Locations.g5;
+                        case 2:
+                            return Locations.g6;
+                        case 1:
+                            return Locations.g7;
+                        case 0:
                             return Locations.g8;
                         default:
                             return Locations.invalid;
@@ -473,36 +491,215 @@ namespace Chess
                 case 7:
                     switch (y)
                     {
-                        case 0:
-                            return Locations.h1;
-                        case 1:
-                            return Locations.h2;
-                        case 2:
-                            return Locations.h3;
-                        case 3:
-                            return Locations.h4;
-                        case 4:
-                            return Locations.h5;
-                        case 5:
-                            return Locations.h6;
-                        case 6:
-                            return Locations.h7;
                         case 7:
+                            return Locations.h1;
+                        case 6:
+                            return Locations.h2;
+                        case 5:
+                            return Locations.h3;
+                        case 4:
+                            return Locations.h4;
+                        case 3:
+                            return Locations.h5;
+                        case 2:
+                            return Locations.h6;
+                        case 1:
+                            return Locations.h7;
+                        case 0:
                             return Locations.h8;
                         default:
                             return Locations.invalid;
-
-
                     }
                 default:
                     return Locations.invalid;
-            }
 
+            }
+        }
+        private int GetLocX(Locations loc)
+        {
+            switch (loc)
+            {
+                case Locations.a1:
+                case Locations.a2:
+                case Locations.a3:
+                case Locations.a4:
+                case Locations.a5:
+                case Locations.a6:
+                case Locations.a7:
+                case Locations.a8:
+                    return 0;
+                case Locations.b1:
+                case Locations.b2:
+                case Locations.b3:
+                case Locations.b4:
+                case Locations.b5:
+                case Locations.b6:
+                case Locations.b7:
+                case Locations.b8:
+                    return 1;
+
+                case Locations.c1:
+                case Locations.c2:
+                case Locations.c3:
+                case Locations.c4:
+                case Locations.c5:
+                case Locations.c6:
+                case Locations.c7:
+                case Locations.c8:
+                    return 2;
+
+                case Locations.d1:
+                case Locations.d2:
+                case Locations.d3:
+                case Locations.d4:
+                case Locations.d5:
+                case Locations.d6:
+                case Locations.d7:
+                case Locations.d8:
+                    return 3;
+
+                case Locations.e1:
+                case Locations.e2:
+                case Locations.e3:
+                case Locations.e4:
+                case Locations.e5:
+                case Locations.e6:
+                case Locations.e7:
+                case Locations.e8:
+                    return 4;
+
+                case Locations.f1:
+                case Locations.f2:
+                case Locations.f3:
+                case Locations.f4:
+                case Locations.f5:
+                case Locations.f6:
+                case Locations.f7:
+                case Locations.f8:
+                    return 5;
+
+                case Locations.g1:
+                case Locations.g2:
+                case Locations.g3:
+                case Locations.g4:
+                case Locations.g5:
+                case Locations.g6:
+                case Locations.g7:
+                case Locations.g8:
+                    return 6;
+
+                case Locations.h1:
+                case Locations.h2:
+                case Locations.h3:
+                case Locations.h4:
+                case Locations.h5:
+                case Locations.h6:
+                case Locations.h7:
+                case Locations.h8:
+                    return 7;
+
+
+                default:
+                    return -1;
+            }
         }
 
+        private int GetLocY(Locations loc)
+        {
+            switch (loc)
+            {
+                case Locations.a1:
+                case Locations.b1:
+                case Locations.c1:
+                case Locations.d1:
+                case Locations.e1:
+                case Locations.f1:
+                case Locations.g1:
+                case Locations.h1:
+                    return 7;
+
+                case Locations.a2:
+                case Locations.b2:
+                case Locations.c2:
+                case Locations.d2:
+                case Locations.e2:
+                case Locations.f2:
+                case Locations.g2:
+                case Locations.h2:
+                    return 6;
+
+                case Locations.a3:
+                case Locations.b3:
+                case Locations.c3:
+                case Locations.d3:
+                case Locations.e3:
+                case Locations.f3:
+                case Locations.g3:
+                case Locations.h3:
+                    return 5;
+
+                case Locations.a4:
+                case Locations.b4:
+                case Locations.c4:
+                case Locations.d4:
+                case Locations.e4:
+                case Locations.f4:
+                case Locations.g4:
+                case Locations.h4:
+                    return 4;
+
+                case Locations.a5:
+                case Locations.b5:
+                case Locations.c5:
+                case Locations.d5:
+                case Locations.e5:
+                case Locations.f5:
+                case Locations.g5:
+                case Locations.h5:
+                    return 3;
+
+                case Locations.a6:
+                case Locations.b6:
+                case Locations.c6:
+                case Locations.d6:
+                case Locations.e6:
+                case Locations.f6:
+                case Locations.g6:
+                case Locations.h6:
+                    return 2;
+
+                case Locations.a7:
+                case Locations.b7:
+                case Locations.c7:
+                case Locations.d7:
+                case Locations.e7:
+                case Locations.f7:
+                case Locations.g7:
+                case Locations.h7:
+                    return 1;
+
+                case Locations.a8:
+                case Locations.b8:
+                case Locations.c8:
+                case Locations.d8:
+                case Locations.e8:
+                case Locations.f8:
+                case Locations.g8:
+                case Locations.h8:
+                    return 0;
+
+                default:
+                    return -1;
+            }
+        }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             parentClient.ExitApplication();
+        }
+        public void resetClickedCells()
+        {
+            prevClickedCell = null;
+            currentClickedCell = null;
         }
 
     }
