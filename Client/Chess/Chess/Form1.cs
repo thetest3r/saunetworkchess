@@ -491,191 +491,191 @@ namespace Chess
                 default:
                     return Locations.invalid;
              * */
-
-              switch (x)
+               switch (x)
             {
                 case 0:
                     switch (y)
                     {
                         case 0:
-                            return Game.Locations.a1;
+                            return Locations.a1;
                         case 1:
-                            return Game.Locations.a2;
+                            return Locations.a2;
                         case 2:
-                            return Game.Locations.a3;
+                            return Locations.a3;
                         case 3:
-                            return Game.Locations.a4;
+                            return Locations.a4;
                         case 4:
-                            return Game.Locations.a5;
+                            return Locations.a5;
                         case 5:
-                            return Game.Locations.a6;
+                            return Locations.a6;
                         case 6:
-                            return Game.Locations.a7;
+                            return Locations.a7;
                         case 7:
-                            return Game.Locations.a8;
+                            return Locations.a8;
                         default:
-                            return Game.Locations.invalid;
+                            return Locations.invalid;
                     }
                 case 1:
                     switch (y)
                     {
                         case 0:
-                            return Game.Locations.b1;
+                            return Locations.b1;
                         case 1:
-                            return Game.Locations.b2;
+                            return Locations.b2;
                         case 2:
-                            return Game.Locations.b3;
+                            return Locations.b3;
                         case 3:
-                            return Game.Locations.b4;
+                            return Locations.b4;
                         case 4:
-                            return Game.Locations.b5;
+                            return Locations.b5;
                         case 5:
-                            return Game.Locations.b6;
+                            return Locations.b6;
                         case 6:
-                            return Game.Locations.b7;
+                            return Locations.b7;
                         case 7:
-                            return Game.Locations.b8;
+                            return Locations.b8;
                         default:
-                            return Game.Locations.invalid;
+                            return Locations.invalid;
 
                     }
                 case 2:
                     switch (y)
                     {
                         case 0:
-                            return Game.Locations.c1;
+                            return Locations.c1;
                         case 1:
-                            return Game.Locations.c2;
+                            return Locations.c2;
                         case 2:
-                            return Game.Locations.c3;
+                            return Locations.c3;
                         case 3:
-                            return Game.Locations.c4;
+                            return Locations.c4;
                         case 4:
-                            return Game.Locations.c5;
+                            return Locations.c5;
                         case 5:
-                            return Game.Locations.c6;
+                            return Locations.c6;
                         case 6:
-                            return Game.Locations.c7;
+                            return Locations.c7;
                         case 7:
-                            return Game.Locations.c8;
+                            return Locations.c8;
                         default:
-                            return Game.Locations.invalid;
+                            return Locations.invalid;
 
                     }
                 case 3:
                     switch (y)
                     {
                         case 0:
-                            return Game.Locations.d1;
+                            return Locations.d1;
                         case 1:
-                            return Game.Locations.d2;
+                            return Locations.d2;
                         case 2:
-                            return Game.Locations.d3;
+                            return Locations.d3;
                         case 3:
-                            return Game.Locations.d4;
+                            return Locations.d4;
                         case 4:
-                            return Game.Locations.d5;
+                            return Locations.d5;
                         case 5:
-                            return Game.Locations.d6;
+                            return Locations.d6;
                         case 6:
-                            return Game.Locations.d7;
+                            return Locations.d7;
                         case 7:
-                            return Game.Locations.d8;
+                            return Locations.d8;
                         default:
-                            return Game.Locations.invalid;
+                            return Locations.invalid;
 
                     }
                 case 4:
                     switch (y)
                     {
                         case 0:
-                            return Game.Locations.e1;
+                            return Locations.e1;
                         case 1:
-                            return Game.Locations.e2;
+                            return Locations.e2;
                         case 2:
-                            return Game.Locations.e3;
+                            return Locations.e3;
                         case 3:
-                            return Game.Locations.e4;
+                            return Locations.e4;
                         case 4:
-                            return Game.Locations.e5;
+                            return Locations.e5;
                         case 5:
-                            return Game.Locations.e6;
+                            return Locations.e6;
                         case 6:
-                            return Game.Locations.e7;
+                            return Locations.e7;
                         case 7:
-                            return Game.Locations.e8;
+                            return Locations.e8;
                         default:
-                            return Game.Locations.invalid;
+                            return Locations.invalid;
 
                     }
                 case 5:
                     switch (y)
                     {
                         case 0:
-                            return Game.Locations.f1;
+                            return Locations.f1;
                         case 1:
-                            return Game.Locations.f2;
+                            return Locations.f2;
                         case 2:
-                            return Game.Locations.f3;
+                            return Locations.f3;
                         case 3:
-                            return Game.Locations.f4;
+                            return Locations.f4;
                         case 4:
-                            return Game.Locations.f5;
+                            return Locations.f5;
                         case 5:
-                            return Game.Locations.f6;
+                            return Locations.f6;
                         case 6:
-                            return Game.Locations.f7;
+                            return Locations.f7;
                         case 7:
-                            return Game.Locations.f8;
+                            return Locations.f8;
                         default:
-                            return Game.Locations.invalid;
+                            return Locations.invalid;
 
                     };
                 case 6:
                     switch (y)
                     {
                         case 0:
-                            return Game.Locations.g1;
+                            return Locations.g1;
                         case 1:
-                            return Game.Locations.g2;
+                            return Locations.g2;
                         case 2:
-                            return Game.Locations.g3;
+                            return Locations.g3;
                         case 3:
-                            return Game.Locations.g4;
+                            return Locations.g4;
                         case 4:
-                            return Game.Locations.g5;
+                            return Locations.g5;
                         case 5:
-                            return Game.Locations.g6;
+                            return Locations.g6;
                         case 6:
-                            return Game.Locations.g7;
+                            return Locations.g7;
                         case 7:
-                            return Game.Locations.g8;
+                            return Locations.g8;
                         default:
-                            return Game.Locations.invalid;
+                            return Locations.invalid;
 
                     }
                 case 7:
                     switch (y)
                     {
                         case 0:
-                            return Game.Locations.h1;
+                            return Locations.h1;
                         case 1:
-                            return Game.Locations.h2;
+                            return Locations.h2;
                         case 2:
-                            return Game.Locations.h3;
+                            return Locations.h3;
                         case 3:
-                            return Game.Locations.h4;
+                            return Locations.h4;
                         case 4:
-                            return Game.Locations.h5;
+                            return Locations.h5;
                         case 5:
-                            return Game.Locations.h6;
+                            return Locations.h6;
                         case 6:
-                            return Game.Locations.h7;
+                            return Locations.h7;
                         case 7:
-                            return Game.Locations.h8;
+                            return Locations.h8;
                         default:
-                            return Game.Locations.invalid;
+                            return Locations.invalid;
 
+           
                     }
                 default:
                     return Game.Locations.invalid;
