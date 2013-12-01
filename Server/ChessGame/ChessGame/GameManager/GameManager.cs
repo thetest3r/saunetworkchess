@@ -45,18 +45,49 @@ namespace ChessGame.GameManager
             return null;
         }
 
-        public void RemoveGame()
+        public void RemoveGame(int id)
         {
+            lock (syncRoot)
+            {
+                for (int i = 0; i < games.Count; i++)
+                {
+                    if (games[i].Id == id)
+                    {
+                        games.RemoveAt(i);
+                        return;
+                    }
+                }
+                
+            }
+            
+        }
+
+        public GameLogic.Game GetGame(int id)
+        {
+            GameLogic.Game game = null;
+            lock (syncRoot)
+            {
+                for (int i = 0; i < games.Count; i++)
+                {
+                    if (games[i].Id == id)
+                    {
+                        game = games[i];
+                    }
+                }
+
+            }
+            return game;
 
         }
 
         public GameLogic.Game GetLastItem()
         {
+            GameLogic.Game game;
             lock (syncRoot)
             {
-                
+                game = games[games.Count - 1];
             }
-            return null;
+            return game;
         }
 
     }

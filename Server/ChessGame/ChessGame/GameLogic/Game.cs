@@ -24,6 +24,7 @@ namespace ChessGame.GameLogic
             this.Player1 = Player1;
             this.Player2 = Player2;
             Id = identification;
+            board = new Board();
         }
 
         void Reset()
