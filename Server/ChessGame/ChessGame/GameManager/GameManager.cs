@@ -32,9 +32,12 @@ namespace ChessGame.GameManager
             }
         }
 
-        public void AddGame()
+        public void AddGame(GameLogic.Game g)
         {
-
+            lock (syncRoot)
+            {
+                games.Add(g);
+            }
         }
 
         public GameLogic.Game GetReferenceToGame()
@@ -45,6 +48,15 @@ namespace ChessGame.GameManager
         public void RemoveGame()
         {
 
+        }
+
+        public GameLogic.Game GetLastItem()
+        {
+            lock (syncRoot)
+            {
+                
+            }
+            return null;
         }
 
     }
