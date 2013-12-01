@@ -12,6 +12,7 @@ namespace Checkmate_
         private TcpClient server;
         static NetworkStream stream;
         private FormThread form;
+        int gameId;
 
         public CheckmateClient()
         {
@@ -31,10 +32,12 @@ namespace Checkmate_
             try
             {
                 server.Connect("127.0.0.1", 1991);
+                form._form.IpBoxMessage("Connected to Server");
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex);
+                form._form.IpBoxMessage("Unable to Reach Server");
                 return;
             }
             stream = server.GetStream();
@@ -52,10 +55,22 @@ namespace Checkmate_
 
         public void SendtoServer(int currentPos,int newPos)
         {
-            string data = "8|" + currentPos.ToString() + "|" + newPos.ToString() + "$";
+            string data = "8|" + currentPos.ToString() + "|" + newPos.ToString()+ "$";
             byte[] bytes = Encoding.ASCII.GetBytes(data);
             stream.Write(bytes, 0, bytes.Length);
             stream.Flush();
+        }
+        public void SendtoServer(string data)
+        {
+            string data1 = "8|" + data + "$";
+            form._form.IpBoxMessage(data);
+            byte[] bytes = Encoding.ASCII.GetBytes(data1);
+            stream.Write(bytes, 0, bytes.Length);
+            stream.Flush();
+        }
+        public void ExitApplication()
+        {
+            Application.Exit();
         }
 
         public void ListenforServer()
@@ -69,7 +84,7 @@ namespace Checkmate_
                     string msg = Encoding.ASCII.GetString(bytes);
                     int index = msg.IndexOf("$") > 0 ? msg.IndexOf("$")
                         : msg.IndexOf('\0');
-                    // 2 is a reply from a move form(1|bool)
+                    // 2 is a reply from a move form(2|bool)
                     if (msg[0] == '2')
                     {
                         if (msg[2] == '0')
@@ -127,17 +142,17 @@ namespace Checkmate_
                     {
                         MessageBox.Show("The other player quit.");
                     }
-                        // 7 is to begin a game form(7|bool)
+                        // 7 is to begin a game form(7|bool|int)
                     else if (msg[0] == '7')
                     {
                         if (msg[2] == '0')
                         {
-                            form._form.IpBoxMessage("The game has begun. You are white. You go first.");
+                            form._form.IpBoxMessage("The game has begun. You are white. It's black's turn.");
 
                         }
                         else if (msg[2] == '1')
                         {
-                            form._form.IpBoxMessage("The game has begun. You are black. It's white's turn.");
+                            form._form.IpBoxMessage("The game has begun. You are black. It's your turn.");
                         }
                         else
                             MessageBox.Show("OpCode 2 - Reply not recognized");
@@ -147,7 +162,8 @@ namespace Checkmate_
             catch (Exception ex)
             {
                 MessageBox.Show("You've been disconnected.");
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                Application.Exit();
                 return;
             }
         }

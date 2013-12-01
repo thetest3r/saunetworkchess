@@ -193,6 +193,9 @@ namespace Chess
                 listBox1.Items.Add(GetLocation(rowCol[1], rowCol[0]));
                 listBox1.Items.Add(sendInfo);
                 currentClickedCell = temp;
+                parentClient.SendtoServer(sendInfo);
+                //IpBoxMessage(sendInfo);
+                //parentClient.SendtoServer(rowCol[0], rowCol[1]);
                 /*
                  *Locations x = Locations.a1;
                   string y = Convert.ToString((int) x) + "|";
@@ -212,6 +215,7 @@ namespace Chess
             //System.Diagnostics.Debug.WriteLine("Click: " + cell);
             string i = sender.ToString();
             IPAddrBox.Text = "Hello World" + i;
+            //parentClient.SendtoServer(i);
             //Reference to update picture inside picture box http://stackoverflow.com/questions/9030622/how-to-refresh-picturebox
         }
 
@@ -273,7 +277,8 @@ namespace Chess
 
         public void IpBoxMessage(string msg)
         {
-            IPAddrBox.Text = msg;
+            listBox1.Items.Add(msg);
+            //IPAddrBox.Text = msg;
             return;
         }
         public void validMove()
@@ -487,6 +492,15 @@ namespace Chess
 
             }
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
         }
     }
 }
