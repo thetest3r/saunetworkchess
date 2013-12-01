@@ -51,7 +51,7 @@ namespace ChessGame.Network_Logic
 
         public void endGame()
         {
-
+            GameManager.GameManager g = GameManager.GameManager.Instance;
         }
 
         public static void beginGame(TcpClient client1, TcpClient client2)

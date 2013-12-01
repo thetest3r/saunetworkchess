@@ -47,6 +47,7 @@
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\Piece.cs" />
     <Compile Include="GameLogic\Square.cs" />
+    <Compile Include="GameManager\GameManager.cs" />
     <Compile Include="Network Logic\HandleClient.cs" />
     <Compile Include="Network Logic\Networkhandler.cs" />
     <Compile Include="Program.cs" />
