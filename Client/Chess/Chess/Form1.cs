@@ -167,13 +167,13 @@ namespace Chess
             int[] rowCol;
             if (prevClickedCell == null)
             {
-                updateNetworkInfo();
+                //updateNetworkInfo();
                 prevClickedCell = (Cell)sender;
                 temp.BackColor = System.Drawing.Color.Blue;
             }
             else if (prevClickedCell == temp)
             {
-                updateNetworkInfo();
+                //updateNetworkInfo();
                 rowCol = prevClickedCell.ToInt();
                 prevClickedCell = null;
                 temp.BackColor = (rowCol[0] % 2 == rowCol[1] % 2) ? Color.Black : Color.DarkGray;
@@ -184,7 +184,7 @@ namespace Chess
                 
                 rowCol = prevClickedCell.ToInt();
                 prevClickedCell.BackColor = (rowCol[0] % 2 == rowCol[1] % 2) ? Color.Black : Color.DarkGray;
-                updateNetworkInfo();
+                //updateNetworkInfo();
                 rowCol = prevClickedCell.ToInt();
                 listBox1.Items.Add(GetLocation(rowCol[1],rowCol[0]));
                 sendInfo = Convert.ToString((int)GetLocation(rowCol[0], rowCol[1])) + "|";
@@ -286,10 +286,14 @@ namespace Chess
             Cell temp = prevClickedCell;
             currentClickedCell.Image = temp.Image;
             prevClickedCell.Image = null;
+            prevClickedCell = null;
+            currentClickedCell = null;
 
         }
         public void oppenentsMove(int currentPos, int newPos)
         {
+            IpBoxMessage(currentPos.ToString());
+            IpBoxMessage(newPos.ToString());
             Cell temp = cellDuplicate[newPos];
             cellDuplicate[newPos].Image = cellDuplicate[currentPos].Image;
             cellDuplicate[currentPos].Image = null;
@@ -678,20 +682,15 @@ namespace Chess
            
                     }
                 default:
-                    return Game.Locations.invalid;
+                    return Locations.invalid;
             }
 
             }
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            parentClient.ExitApplication();
+        }
+
         }
     }
-}

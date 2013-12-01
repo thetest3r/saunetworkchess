@@ -94,11 +94,11 @@ namespace ChessGame.Network_Logic
                         //Opcode of 8 is for attempting a move form(8|int|int)
                         if (dataFromClient[0] == '8')
                         {
-                            dataFromClient = dataFromClient.Trim('|');
+                            Console.WriteLine(dataFromClient);
                             string[] positions = dataFromClient.Split('|');
                             //YourEnum foo = (YourEnum)Enum.Parse(typeof(YourEnum), yourString);
-                            //ChessGame.GameLogic.Game.Locations origin = (ChessGame.GameLogic.Game.Locations)Enum.Parse(typeof(ChessGame.GameLogic.Game.Locations), positions[0]);
-                            //ChessGame.GameLogic.Game.Locations newPos = (ChessGame.GameLogic.Game.Locations)Enum.Parse(typeof(ChessGame.GameLogic.Game.Locations), positions[1]);
+                            ChessGame.GameLogic.Game.Locations origin = (ChessGame.GameLogic.Game.Locations) int.Parse(positions[1]);
+                            ChessGame.GameLogic.Game.Locations newPos = (ChessGame.GameLogic.Game.Locations) int.Parse(positions[2]);
                             //bool valid = game.Move(team, origin, newPos);
                             foreach(string i in positions)
                             {
@@ -111,10 +111,10 @@ namespace ChessGame.Network_Logic
                                 if (game.Player1 == _clientSocket)
                                 {
                                     //form(3|int|int)
-                                    OpponentsMove(game.Player2, int.Parse(positions[0]), int.Parse(positions[1]));
+                                    OpponentsMove(game.Player2, int.Parse(positions[1]), int.Parse(positions[2]));
                                 }
                                 else
-                                    OpponentsMove(game.Player1, int.Parse(positions[0]), int.Parse(positions[1]));
+                                    OpponentsMove(game.Player1, int.Parse(positions[1]), int.Parse(positions[2]));
                             }
                             else
                                 ReturnValidMove(_clientSocket, valid);

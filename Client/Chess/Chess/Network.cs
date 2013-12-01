@@ -103,9 +103,15 @@ namespace Checkmate_
                         // 3 is when the other player moves form(3|int|int)
                     else if(msg[0]== '3')
                     {
+                        form._form.IpBoxMessage(msg);
                         msg = msg.Trim('|');
+                        form._form.IpBoxMessage(msg);
                         string[] positions = msg.Split('|');
-                        form._form.oppenentsMove(int.Parse(positions[0]), int.Parse(positions[1]));
+                        foreach (string i in positions)
+                        {
+                            form._form.IpBoxMessage(i);
+                        }
+                        form._form.oppenentsMove(int.Parse(positions[1]), int.Parse(positions[2]));
                     }
                         // 4 declares check form(4|int|bool)
                     else if (msg[0] == '4')
