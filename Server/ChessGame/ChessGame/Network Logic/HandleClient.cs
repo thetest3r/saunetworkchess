@@ -49,12 +49,12 @@ namespace ChessGame.Network_Logic
                             //YourEnum foo = (YourEnum)Enum.Parse(typeof(YourEnum), yourString);
                             ChessGame.GameLogic.Game.Locations origin = (ChessGame.GameLogic.Game.Locations) int.Parse(positions[1]);
                             ChessGame.GameLogic.Game.Locations newPos = (ChessGame.GameLogic.Game.Locations) int.Parse(positions[2]);
-                            //bool valid = game.Move(team, origin, newPos);
+                            bool valid = game.Move(team, origin, newPos);
                             foreach(string i in positions)
                             {
                                 Console.WriteLine(i);
                             }
-                            bool valid = true;
+                            //bool valid = true;
                             if (valid)
                             {
                                 ReturnValidMove(_clientSocket, valid);
@@ -83,6 +83,7 @@ namespace ChessGame.Network_Logic
                         {
                             Console.WriteLine("removing client");
                             NetworkHandler.removeGame(game.Id);
+                            NetworkHandler.endGame(game.Player1, game.Player2);
                             return;
                         }
 

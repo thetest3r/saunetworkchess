@@ -18,6 +18,7 @@ namespace ChessGame.Network_Logic
     {
         public static List<HandleClient> ClientList = new List<HandleClient>();
         public static TcpListener serverSocket;
+        int numClients = 1;
         public static void startListening()
         {
             GameManager.GameManager gameManager = GameManager.GameManager.Instance;
@@ -45,8 +46,11 @@ namespace ChessGame.Network_Logic
                 i++;
             }
         }
-        public void endGame()
+        public static void endGame(TcpClient client1, TcpClient client2)
         {
+            string send = "6|";
+            SendMessage(client1, send);
+            SendMessage(client2, send);
         }
         public static void removeGame(int id)
         {
@@ -57,18 +61,9 @@ namespace ChessGame.Network_Logic
         public static void beginGame(TcpClient client1, TcpClient client2)
         {
             string send = "7|0";
-            var broadcastSocket = client1;
-            NetworkStream broadcastStream = broadcastSocket.GetStream();
-            byte[] broadcastBytes = Encoding.ASCII.GetBytes(send);
-            broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
-            broadcastStream.Flush();
-
+            SendMessage(client1, send);
             send = "7|1";
-            broadcastSocket = client2;
-            broadcastStream = broadcastSocket.GetStream();
-            broadcastBytes = Encoding.ASCII.GetBytes(send);
-            broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
-            broadcastStream.Flush();
+            SendMessage(client2, send);
         }
 
         public static void SendCheck(TcpClient client1, TcpClient client2, int location, bool player)
@@ -78,17 +73,8 @@ namespace ChessGame.Network_Logic
                 send += '1';
             else
                 send += '0';
-            var broadcastSocket = client1;
-            NetworkStream broadcastStream = broadcastSocket.GetStream();
-            byte[] broadcastBytes = Encoding.ASCII.GetBytes(send);
-            broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
-            broadcastStream.Flush();
-
-            broadcastSocket = client2;
-            broadcastStream = broadcastSocket.GetStream();
-            broadcastBytes = Encoding.ASCII.GetBytes(send);
-            broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
-            broadcastStream.Flush();
+            SendMessage(client1, send);
+            SendMessage(client2, send);
         }
         public static void PlayerWins(TcpClient client1, TcpClient client2, bool player)
         {
@@ -97,15 +83,15 @@ namespace ChessGame.Network_Logic
                 send += '1';
             else
                 send += '0';
-            var broadcastSocket = client1;
-            NetworkStream broadcastStream = broadcastSocket.GetStream();
-            byte[] broadcastBytes = Encoding.ASCII.GetBytes(send);
-            broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
-            broadcastStream.Flush();
+            SendMessage(client1, send);
+            SendMessage(client2, send);
+        }
 
-            broadcastSocket = client2;
-            broadcastStream = broadcastSocket.GetStream();
-            broadcastBytes = Encoding.ASCII.GetBytes(send);
+        public static void SendMessage(TcpClient clientSocket, string msg)
+        {
+            var broadcastSocket = clientSocket;
+            NetworkStream broadcastStream = broadcastSocket.GetStream();
+            byte[] broadcastBytes = Encoding.ASCII.GetBytes(msg);
             broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
             broadcastStream.Flush();
         }
