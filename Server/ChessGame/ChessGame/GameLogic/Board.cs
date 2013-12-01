@@ -532,9 +532,9 @@ namespace ChessGame.GameLogic
                     {
 
                         // If pawn is at origin it can move 2 spaces forward
-                        if (Oy == 7)
+                        if (Oy == 6)
                         {
-                            temporary = GetLocation(Ox, 5);
+                            temporary = GetLocation(Ox, 4);
                             bool isJumpedSpotOccupied = IsSquareOccupied(GetLocation(Ox, 6));
                             if (!isJumpedSpotOccupied)
                             {
@@ -585,9 +585,9 @@ namespace ChessGame.GameLogic
                 case Game.Team.White:
                     {
                         // If pawn is at origin it can move 2 spaces forward
-                        if (Oy == 2)
+                        if (Oy == 1)
                         {
-                            temporary = GetLocation(Ox, 4);
+                            temporary = GetLocation(Ox, 3);
                             bool isJumpedSpotOccupied = IsSquareOccupied(GetLocation(Ox, 3));
                             if (!isJumpedSpotOccupied)
                             {
@@ -640,7 +640,7 @@ namespace ChessGame.GameLogic
 
             }
 
-            for (int i = 0; i <= list.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
                 if (list[i] == destination)
                 {
