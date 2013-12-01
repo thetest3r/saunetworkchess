@@ -24,3 +24,4 @@ C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\obj\Debug\Chess.csproj
 C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\bin\Debug\Chess.exe
 C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\bin\Debug\Chess.pdb
 C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\obj\Debug\Chess.Form1.resources
+C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\obj\Debug\Chess.Form1.resources
