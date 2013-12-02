@@ -113,8 +113,22 @@ namespace ChessGame.GameLogic
         }
 
 
-        
+        public GameLogic.Game.Team WhatTeamIsInCheck()
+        {
+            return WaitingForThisColorToMove;
+        }
 
+        public GameLogic.Game.Locations LocationOfKingInCheck()
+        {
+            if (WaitingForThisColorToMove == Team.Black)
+            {
+                return board.BlackKingLoc;
+            }
+            else
+            {
+                return board.WhiteKingLoc;
+            }
+        }
 
 
     }

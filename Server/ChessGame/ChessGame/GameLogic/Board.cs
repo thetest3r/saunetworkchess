@@ -7,8 +7,16 @@ namespace ChessGame.GameLogic
 {
     class Board
     {
-        private Game.Locations WhiteKingLoc;
-        private Game.Locations BlackKingLoc;
+        public Game.Locations WhiteKingLoc
+        {
+            get;
+            private set;
+        }
+        public Game.Locations BlackKingLoc
+        {
+            get;
+            private set;
+        }
 
         Square[,] board = new Square[8, 8];
 
