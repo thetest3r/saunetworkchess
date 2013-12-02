@@ -27,14 +27,14 @@ namespace Chess
             private enum pieces { WCastle, WKnight, WBishop, WKing, WQueen, WPawn, Blank, BCastle, BKnight, BBishop, BKing, BQueen, BPawn };
             private static pieces[,] boardArray = new pieces[8, 8] 
             {
-            {pieces.BCastle,pieces.BKnight,pieces.BBishop, pieces.BKing, pieces.BQueen, pieces.BBishop, pieces.BKnight, pieces.BCastle},
+            {pieces.BCastle,pieces.BKnight,pieces.BBishop, pieces.BQueen, pieces.BKing, pieces.BBishop, pieces.BKnight, pieces.BCastle},
             {pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn, pieces.BPawn},
             {pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank},
             {pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank},
             {pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank},
             {pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank, pieces.Blank},
             {pieces.WPawn, pieces.WPawn, pieces.WPawn, pieces.WPawn, pieces.WPawn, pieces.WPawn, pieces.WPawn, pieces.WPawn},
-            {pieces.WCastle,pieces.WKnight,pieces.WBishop, pieces.WKing, pieces.WQueen, pieces.WBishop, pieces.WKnight, pieces.WCastle}
+            {pieces.WCastle,pieces.WKnight,pieces.WBishop, pieces.WQueen, pieces.WKing, pieces.WBishop, pieces.WKnight, pieces.WCastle}
             };
             private bool isImageLoaded = false;
             private static int cellID = 0;
