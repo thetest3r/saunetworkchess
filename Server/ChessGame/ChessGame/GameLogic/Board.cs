@@ -486,29 +486,99 @@ namespace ChessGame.GameLogic
 
         }
 
-        private bool checkForCheckandMove(int Ox, int Oy, int Dx, int Dy)
+        private GameLogic.Game.ResultOfMove checkForCheckandMove(int Ox, int Oy, int Dx, int Dy)
         {
             // Add checks for checkmate
 
+            Piece capturedPiece = null;
+            bool pieceWasCaptured = false;
 
+            bool moveItselfValid = false;
+            bool invalidMoveDueToCheck = false;
 
 
 
             Piece pieceToMove = board[Ox, Oy].MoveAway();
+
+            GameLogic.Game.Team MovingTeam = pieceToMove.Team;
+            GameLogic.Game.Team OpposingTeam;
+
+            if (MovingTeam == Game.Team.Black)
+            {
+                OpposingTeam = Game.Team.White;
+            }
+            else
+            {
+                OpposingTeam = Game.Team.Black;
+            }
+
+            // Find locations of the kings.
+
+            GameLogic.Game.Locations locationOfMovingTeamsKing;
+            GameLogic.Game.Locations locationOfOpposingTeamsKing;
+
+            if (MovingTeam == Game.Team.Black)
+            {
+                locationOfMovingTeamsKing = BlackKingLoc;
+                locationOfOpposingTeamsKing = WhiteKingLoc;
+            }
+            else
+            {
+                locationOfMovingTeamsKing = WhiteKingLoc;
+                locationOfOpposingTeamsKing = BlackKingLoc;
+            }
+
+
             if (board[Dx, Dy].occupied)
             {
+                capturedPiece = board[Dx, Dy].piece;
                 board[Dx, Dy].Capture(pieceToMove);
-                return true;
+                moveItselfValid = true;
+                pieceWasCaptured = true;
             }
             else
             {
                 board[Dx, Dy].MoveTo(pieceToMove);
-                return true;
+                moveItselfValid = true;
             }
+
+            // If Move Is invalid don't waste time checking for check
+            if (!moveItselfValid)
+            {
+                return GameLogic.Game.ResultOfMove.Failure;
+            }
+
+
+            // Check to see if the move is invalid by putting a player in check
+            invalidMoveDueToCheck = IsKingInCheck(MovingTeam, locationOfMovingTeamsKing);
+
+            if (!invalidMoveDueToCheck)
+            {
+                pieceToMove = board[Dx, Dy].MoveAway();
+                board[Ox, Oy].MoveTo(pieceToMove);
+
+                if (pieceWasCaptured)
+                {
+                    board[Dx, Dy].MoveTo(capturedPiece);
+                }
+
+                return GameLogic.Game.ResultOfMove.Failure;
+            }
+
+            return Game.ResultOfMove.Success;
+
+
         }
 
+        private bool IsKingInCheck(GameLogic.Game.Team colorOfKing, GameLogic.Game.Locations locationOfKing)
+        {
 
-        public bool movePawn(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+
+
+            return true;
+        }
+
+        public Game.ResultOfMove movePawn(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
         {
             int Ox = GetLocX(origin);
             int Oy = GetLocY(origin);
@@ -516,7 +586,7 @@ namespace ChessGame.GameLogic
             int Dx = GetLocX(destination);
             int Dy = GetLocY(destination);
 
-            bool success = false;
+            Game.ResultOfMove success = Game.ResultOfMove.Failure;
 
             ChessGame.GameLogic.Game.Team team = board[Ox, Oy].piece.Team;
 
@@ -636,7 +706,7 @@ namespace ChessGame.GameLogic
                     break;
 
                 default:
-                    return false;
+                    return Game.ResultOfMove.Failure;
 
             }
 
