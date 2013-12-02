@@ -89,19 +89,37 @@ namespace ChessGame.Network_Logic
 
         public static void SendMessage(TcpClient clientSocket, string msg)
         {
-            var broadcastSocket = clientSocket;
-            NetworkStream broadcastStream = broadcastSocket.GetStream();
-            byte[] broadcastBytes = Encoding.ASCII.GetBytes(msg);
-            broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
-            broadcastStream.Flush();
+            try
+            {
+                var broadcastSocket = clientSocket;
+                NetworkStream broadcastStream = broadcastSocket.GetStream();
+                byte[] broadcastBytes = Encoding.ASCII.GetBytes(msg);
+                broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
+                broadcastStream.Flush();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return;
+            }
+
         }
         public static string RecieveString(TcpClient clientSocket)
         {
-            var bytesFrom = new byte[clientSocket.ReceiveBufferSize];
-            NetworkStream networkStream = clientSocket.GetStream();
-            networkStream.Read(bytesFrom, 0, clientSocket.ReceiveBufferSize);
-            string dataFromClient = Encoding.ASCII.GetString(bytesFrom);
-            return dataFromClient.Substring(0, dataFromClient.IndexOf("$", StringComparison.Ordinal));
+            try
+            {
+                var bytesFrom = new byte[clientSocket.ReceiveBufferSize];
+                NetworkStream networkStream = clientSocket.GetStream();
+                networkStream.Read(bytesFrom, 0, clientSocket.ReceiveBufferSize);
+                string dataFromClient = Encoding.ASCII.GetString(bytesFrom);
+                return dataFromClient.Substring(0, dataFromClient.IndexOf("$", StringComparison.Ordinal));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+            return null;
         }
     }
 }

@@ -37,8 +37,8 @@ namespace ChessGame.Network_Logic
                 int requestCount = 0;
                 while (true)
                 {
-                    //try
-                    //{
+                    try
+                    {
                         requestCount += 1;
                         string dataFromClient = NetworkHandler.RecieveString(_clientSocket);
                         //Opcode of 8 is for attempting a move form(8|int|int)
@@ -75,19 +75,19 @@ namespace ChessGame.Network_Logic
                         }
                         else
                             Console.WriteLine("Command not recognized");
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    Console.WriteLine(ex.ToString());
-                    //    if (_clientSocket.Connected == false)
-                    //    {
-                    //        Console.WriteLine("removing client");
-                    //        NetworkHandler.removeGame(game.Id);
-                    //        NetworkHandler.endGame(game.Player1, game.Player2);
-                    //        return;
-                    //    }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                        if (_clientSocket.Connected == false)
+                        {
+                            Console.WriteLine("removing client");
+                            NetworkHandler.removeGame(game.Id);
+                            NetworkHandler.endGame(game.Player1, game.Player2);
+                            return;
+                        }
 
-                    //}
+                    }
                 }
             }
 

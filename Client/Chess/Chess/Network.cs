@@ -72,6 +72,12 @@ namespace Checkmate_
             Environment.Exit(0);
         }
 
+        public bool isConnected()
+        {
+            if (server == null)
+                return false;
+            return server.Connected;
+        }
         public void ListenforServer()
         {
             try
@@ -141,6 +147,7 @@ namespace Checkmate_
                     else if (msg[0] == '6')
                     {
                         MessageBox.Show("The other player quit.");
+                        ExitApplication();
                         return;
                     }
                     // 7 is to begin a game form(7|bool|int)

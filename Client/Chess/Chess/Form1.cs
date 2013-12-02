@@ -200,8 +200,8 @@ namespace Chess
                 
                 currentClickedCell = temp;
 
-
-                parentClient.SendtoServer(sendInfo);
+                if(parentClient.isConnected())
+                    parentClient.SendtoServer(sendInfo);
 
 
                 //IpBoxMessage(sendInfo);
