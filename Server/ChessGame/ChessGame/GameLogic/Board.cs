@@ -625,7 +625,7 @@ namespace ChessGame.GameLogic
 
             if (result == Game.ResultOfMove.EnemyInCheck)
             {
-                // check for checkmate
+                // check for checkmate -- future work
 
 
 
@@ -1612,7 +1612,7 @@ namespace ChessGame.GameLogic
             {
                 x -= 1;
                 // We don't need to check off the edge of the board
-                if (x < 0)
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -1639,7 +1639,7 @@ namespace ChessGame.GameLogic
             {
                 x += 1;
                 // We don't need to check off the edge of the board
-                if (x > 7)
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -1668,7 +1668,7 @@ namespace ChessGame.GameLogic
             {
                 y += 1;
                 // We don't need to check off the edge of the board
-                if (y > 7)
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -1695,7 +1695,7 @@ namespace ChessGame.GameLogic
             {
                 y -= 1;
                 // We don't need to check off the edge of the board
-                if (y > 7)
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -1744,7 +1744,7 @@ namespace ChessGame.GameLogic
                 y--;
 
                 // We don't need to check off the edge of the board
-                if ((x < 0) || (y < 0))
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -1774,7 +1774,7 @@ namespace ChessGame.GameLogic
                 y--;
 
                 // We don't need to check off the edge of the board
-                if ((x > 7) || (y < 0))
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -1801,7 +1801,7 @@ namespace ChessGame.GameLogic
                 y++;
 
                 // We don't need to check off the edge of the board
-                if ((x < 0) || (y > 7))
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -1828,7 +1828,7 @@ namespace ChessGame.GameLogic
                 y++;
 
                 // We don't need to check off the edge of the board
-                if ((x > 7) || (y > 7))
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -1955,7 +1955,7 @@ namespace ChessGame.GameLogic
                 y--;
 
                 // We don't need to check off the edge of the board
-                if ((x < 0) || (y < 0))
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -1985,7 +1985,7 @@ namespace ChessGame.GameLogic
                 y--;
 
                 // We don't need to check off the edge of the board
-                if ((x > 7) || (y < 0))
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -2012,7 +2012,7 @@ namespace ChessGame.GameLogic
                 y++;
 
                 // We don't need to check off the edge of the board
-                if ((x < 0) || (y > 7))
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -2039,7 +2039,7 @@ namespace ChessGame.GameLogic
                 y++;
 
                 // We don't need to check off the edge of the board
-                if ((x > 7) || (y > 7))
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -2067,7 +2067,7 @@ namespace ChessGame.GameLogic
             {
                 x -= 1;
                 // We don't need to check off the edge of the board
-                if (x < 0)
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -2094,7 +2094,7 @@ namespace ChessGame.GameLogic
             {
                 x += 1;
                 // We don't need to check off the edge of the board
-                if (x > 7)
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -2123,7 +2123,7 @@ namespace ChessGame.GameLogic
             {
                 y += 1;
                 // We don't need to check off the edge of the board
-                if (y > 7)
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
@@ -2150,7 +2150,7 @@ namespace ChessGame.GameLogic
             {
                 y -= 1;
                 // We don't need to check off the edge of the board
-                if (y > 7)
+                if ((x < 0) || (x > 7) || (y > 7) || (y < 0))
                 {
                     break;
                 }
