@@ -19,3 +19,7 @@ C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\obj\Debug\Chess.Form1.
 C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\bin\Debug\Chess.exe.config
 C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\obj\Debug\Chess.exe
 C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Client\Chess\Chess\obj\Debug\Chess.pdb
+C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\obj\Debug\Chess.exe.manifest
+C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\bin\Debug\Chess.exe.manifest
+C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\bin\Debug\Chess.application
+C:\Users\Colby\Documents\Network Chess\Client\Chess\Chess\obj\Debug\Chess.application
