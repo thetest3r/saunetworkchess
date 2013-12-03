@@ -666,10 +666,11 @@ namespace ChessGame.GameLogic
                     break;
 
                 default:
+                    successful = false;
                     break;
             }
 
-            return true;
+            return successful;
         }
 
         public Game.ResultOfMove movePawn(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
