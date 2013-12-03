@@ -621,8 +621,16 @@ namespace ChessGame.GameLogic
                 }
             }
 
+
+
             if (result == Game.ResultOfMove.EnemyInCheck)
             {
+                // check for checkmate
+
+
+
+
+
                 return result;
             }
 
