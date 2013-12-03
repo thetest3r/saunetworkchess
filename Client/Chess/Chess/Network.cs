@@ -12,6 +12,7 @@ namespace Checkmate_
         private TcpClient server;
         static NetworkStream stream;
         private FormThread form;
+        bool inCheck = false;
 
         public CheckmateClient()
         {
@@ -21,7 +22,7 @@ namespace Checkmate_
             ThreadStart ts = new ThreadStart(form.StartUiThread);
             Thread t = new Thread(ts);
             t.Start();
-            Thread.Sleep(4000);
+            Thread.Sleep(2000);
             form._form.parentClient = this;
         }
         public void ConnecttoServer()
@@ -49,23 +50,17 @@ namespace Checkmate_
             var thread = new Thread(ListenforServer);
             thread.Start();
         }
-        //Pass in tcpClient to start it. Will return 0 on success.
-        public void SendtoServer(string opcode, string msg)
+
+        public void SendResignation(string data)
         {
-            string data = opcode + msg + "$";
-            byte[] bytes = Encoding.ASCII.GetBytes(data);
+            string data1 = "9|$";
+            byte[] bytes = Encoding.ASCII.GetBytes(data1);
             stream.Write(bytes, 0, bytes.Length);
             stream.Flush();
         }
 
-        public void SendtoServer(int currentPos, int newPos)
-        {
-            string data = "8|" + currentPos.ToString() + "|" + newPos.ToString() + "$";
-            byte[] bytes = Encoding.ASCII.GetBytes(data);
-            stream.Write(bytes, 0, bytes.Length);
-            stream.Flush();
-        }
-        public void SendtoServer(string data)
+        //Pass in tcpClient to start it. Will return 0 on success.
+        public void SendMovetoServer(string data)
         {
             string data1 = "8|" + data + "$";
             form._form.IpBoxMessage(data);

@@ -81,9 +81,9 @@ namespace ChessGame.Network_Logic
                             else
                                 ReturnValidMove(_clientSocket, false);
                         }//Opcode 1 is for making a move
-                        else if (dataFromClient[0] == '1')
+                        else if (dataFromClient[0] == '9')
                         {
-
+                            NetworkHandler.endGame(game.Player1, game.Player2);
                         }
                         else
                             Console.WriteLine("Command not recognized");
