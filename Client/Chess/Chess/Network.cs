@@ -21,7 +21,7 @@ namespace Checkmate_
             ThreadStart ts = new ThreadStart(form.StartUiThread);
             Thread t = new Thread(ts);
             t.Start();
-            Thread.Sleep(1000);
+            Thread.Sleep(4000);
             form._form.parentClient = this;
         }
         public void ConnecttoServer()
