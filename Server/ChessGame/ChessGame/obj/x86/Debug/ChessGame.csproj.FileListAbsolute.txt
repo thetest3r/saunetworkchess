@@ -9,4 +9,4 @@ C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess 
 C:\Users\TT3 Productions\Documents\Visual Studio 2012\Projects\Networking Chess _Project\Server\ChessGame\ChessGame\obj\x86\Debug\ChessGame.pdb
 C:\Code\Network Project\Server\ChessGame\ChessGame\bin\Debug\ChessGame.exe
 C:\Code\Network Project\Server\ChessGame\ChessGame\bin\Debug\ChessGame.pdb
-C:\Code\Network Project\Server\ChessGame\ChessGame\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Code\Network Project\Server\ChessGame\ChessGame\obj\x86\Debug\ChessGame.csprojResolveAssemblyReference.cache

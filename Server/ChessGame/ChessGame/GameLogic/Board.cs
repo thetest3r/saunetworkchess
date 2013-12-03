@@ -53,9 +53,9 @@ namespace ChessGame.GameLogic
             setSquare(BlackRook, Game.Locations.a8);
             setSquare(BlackKnight, Game.Locations.b8);
             setSquare(BlackBishiop, Game.Locations.c8);
-            setSquare(BlackKing, Game.Locations.d8);
-            BlackKingLoc = Game.Locations.d8;
-            setSquare(BlackQueen, Game.Locations.e8);
+            setSquare(BlackKing, Game.Locations.e8);
+            BlackKingLoc = Game.Locations.e8;
+            setSquare(BlackQueen, Game.Locations.d8);
             setSquare(BlackBishiop, Game.Locations.f8);
             setSquare(BlackKnight, Game.Locations.g8);
             setSquare(BlackRook, Game.Locations.h8);
@@ -72,9 +72,9 @@ namespace ChessGame.GameLogic
             setSquare(WhiteRook, Game.Locations.a1);
             setSquare(WhiteKnight, Game.Locations.b1);
             setSquare(WhiteBishiop, Game.Locations.c1);
-            setSquare(WhiteKing, Game.Locations.d1);
-            WhiteKingLoc = Game.Locations.d1;
-            setSquare(WhiteQueen, Game.Locations.e1);
+            setSquare(WhiteKing, Game.Locations.e1);
+            WhiteKingLoc = Game.Locations.e1;
+            setSquare(WhiteQueen, Game.Locations.d1);
             setSquare(WhiteBishiop, Game.Locations.f1);
             setSquare(WhiteKnight, Game.Locations.g1);
             setSquare(WhiteRook, Game.Locations.h1);
@@ -494,6 +494,7 @@ namespace ChessGame.GameLogic
 
         }
 
+        //still needs work
         private GameLogic.Game.ResultOfMove checkForCheckandMove(int Ox, int Oy, int Dx, int Dy)
         {
             // Add checks for checkmate
@@ -502,7 +503,7 @@ namespace ChessGame.GameLogic
             bool pieceWasCaptured = false;
 
             bool moveItselfValid = false;
-            bool invalidMoveDueToCheck = false;
+            Game.ResultOfMove stateOfCheck;
 
 
 
@@ -539,6 +540,11 @@ namespace ChessGame.GameLogic
 
             if (board[Dx, Dy].occupied)
             {
+                if (board[Dx, Dy].piece.Team == MovingTeam)
+                {
+                    return Game.ResultOfMove.Failure;
+                }
+
                 capturedPiece = board[Dx, Dy].piece;
                 board[Dx, Dy].Capture(pieceToMove);
                 moveItselfValid = true;
@@ -558,9 +564,9 @@ namespace ChessGame.GameLogic
 
 
             // Check to see if the move is invalid by putting a player in check
-            invalidMoveDueToCheck = IsKingInCheck(MovingTeam, locationOfMovingTeamsKing);
+            stateOfCheck = IsKingInCheck(MovingTeam, locationOfMovingTeamsKing);
 
-            if (!invalidMoveDueToCheck)
+            if (stateOfCheck == Game.ResultOfMove.EnemyInCheck)
             {
                 pieceToMove = board[Dx, Dy].MoveAway();
                 board[Ox, Oy].MoveTo(pieceToMove);
@@ -573,15 +579,87 @@ namespace ChessGame.GameLogic
                 return GameLogic.Game.ResultOfMove.Failure;
             }
 
-            return Game.ResultOfMove.Success;
-
-
+           // check to see if the opposing king is in check or checkmate.
+            return IsKingInCheck(OpposingTeam, locationOfOpposingTeamsKing);
         }
 
-        private bool IsKingInCheck(GameLogic.Game.Team colorOfKing, GameLogic.Game.Locations locationOfKing)
+        private Game.ResultOfMove IsKingInCheck(GameLogic.Game.Team colorOfKing, GameLogic.Game.Locations locationOfKing)
         {
+            // This function will return success if there is no state of check.
 
+            Game.ResultOfMove result = Game.ResultOfMove.Success;
 
+            Game.Team attackingColor;
+
+            List<Game.Locations> listOfPiecesThreateningTheKing = new List<Game.Locations>();
+
+            if (colorOfKing == Game.Team.Black)
+            {
+                attackingColor = Game.Team.White;
+            }
+            else
+            {
+                attackingColor = Game.Team.Black;
+            }
+
+            // traverse board and see if any opposing peices can attack the king.
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (board[i, j].occupied)
+                    {
+                        if (board[i, j].piece.Team == attackingColor)
+                        {
+                            if (canThisPeiceMakeThisMove(GetLocation(i, j), locationOfKing))
+                            {
+                                listOfPiecesThreateningTheKing.Add(GetLocation(i, j));
+                                result = Game.ResultOfMove.EnemyInCheck;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (result == Game.ResultOfMove.EnemyInCheck)
+            {
+                // check for checkmate
+            }
+
+            return Game.ResultOfMove.Success;
+        }
+
+        private bool canThisPeiceMakeThisMove(Game.Locations origin, Game.Locations destination)
+        {
+            Piece pieceToMove = GetWhatIsInSquare(origin);
+
+            bool successful = false;
+
+            switch (pieceToMove.Type)
+            {
+
+                case ChessGame.GameLogic.Game.TypeOfPiece.pawn:
+                    successful = tryPawn(origin, destination);
+                    break;
+                case ChessGame.GameLogic.Game.TypeOfPiece.rook:
+                    successful = tryRook(origin, destination);
+                    break;
+                case ChessGame.GameLogic.Game.TypeOfPiece.bishop:
+                    successful = tryBishiop(origin, destination);
+                    break;
+                case ChessGame.GameLogic.Game.TypeOfPiece.knight:
+                    successful = tryKnight(origin, destination);
+                    break;
+                case ChessGame.GameLogic.Game.TypeOfPiece.queen:
+                    successful = tryQueen(origin, destination);
+                    break;
+                case ChessGame.GameLogic.Game.TypeOfPiece.king:
+                    successful = tryKing(origin, destination);
+                    break;
+
+                default:
+                    break;
+            }
 
             return true;
         }
@@ -741,7 +819,7 @@ namespace ChessGame.GameLogic
             return success;
         }
 
-        public bool moveRook(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        public Game.ResultOfMove moveRook(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
         {
             int Ox = GetLocX(origin);
             int Oy = GetLocY(origin);
@@ -868,10 +946,10 @@ namespace ChessGame.GameLogic
                 }
             }
 
-            return false;
+            return Game.ResultOfMove.Failure;
         }
 
-        public bool moveBishiop(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        public Game.ResultOfMove moveBishiop(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
         {
             int Ox = GetLocX(origin);
             int Oy = GetLocY(origin);
@@ -1001,10 +1079,10 @@ namespace ChessGame.GameLogic
             }
 
 
-            return false;
+            return Game.ResultOfMove.Failure;
         }
 
-        public bool moveKnight(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        public Game.ResultOfMove moveKnight(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
         {
             int Ox = GetLocX(origin);
             int Oy = GetLocY(origin);
@@ -1074,10 +1152,10 @@ namespace ChessGame.GameLogic
                 }
             }
 
-            return false;
+            return Game.ResultOfMove.Failure;
         }
 
-        public bool moveQueen(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        public Game.ResultOfMove moveQueen(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
         {
             int Ox = GetLocX(origin);
             int Oy = GetLocY(origin);
@@ -1322,10 +1400,10 @@ namespace ChessGame.GameLogic
                 }
             }
 
-            return false;
+            return Game.ResultOfMove.Failure;
         }
 
-        public bool moveKing(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        public Game.ResultOfMove moveKing(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
         {
             int Ox = GetLocX(origin);
             int Oy = GetLocY(origin);
@@ -1395,8 +1473,154 @@ namespace ChessGame.GameLogic
                 }
             }
 
+            return Game.ResultOfMove.Failure;
+        }
+
+        private bool tryPawn(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            int Ox = GetLocX(origin);
+            int Oy = GetLocY(origin);
+
+            int Dx = GetLocX(destination);
+            int Dy = GetLocY(destination);
+
+            ChessGame.GameLogic.Game.Team team = board[Ox, Oy].piece.Team;
+
+            List<Game.Locations> list = new List<Game.Locations>();
+
+            Game.Locations temporary;
+
+            // black moves down, white moves up.
+
+            switch (team)
+            {
+                case Game.Team.Black:
+                    {
+
+                        
+                        // capture left
+                        temporary = GetLocation((Ox - 1), (Oy - 1));
+                        if (temporary != Game.Locations.invalid)
+                        {
+                            if (IsSquareOccupied(temporary))
+                            {
+                                if (team != WhatTeamOwnsSquare(temporary))
+                                {
+                                    list.Add(temporary);
+                                }
+                            }
+                        }
+
+                        // capture right
+                        temporary = GetLocation((Ox + 1), (Oy - 1));
+                        if (temporary != Game.Locations.invalid)
+                        {
+                            if (IsSquareOccupied(temporary))
+                            {
+                                if (team != WhatTeamOwnsSquare(temporary))
+                                {
+                                    list.Add(temporary);
+                                }
+                            }
+                        }
+
+
+                    }
+                    break;
+
+                case Game.Team.White:
+                    {
+                        
+
+                        // capture left
+                        temporary = GetLocation((Ox - 1), (Oy + 1));
+                        if (temporary != Game.Locations.invalid)
+                        {
+                            if (IsSquareOccupied(temporary))
+                            {
+                                if (team != WhatTeamOwnsSquare(temporary))
+                                {
+                                    list.Add(temporary);
+                                }
+                            }
+                        }
+
+                        // capture right
+                        temporary = GetLocation((Ox + 1), (Oy + 1));
+                        if (temporary != Game.Locations.invalid)
+                        {
+                            if (IsSquareOccupied(temporary))
+                            {
+                                if (team != WhatTeamOwnsSquare(temporary))
+                                {
+                                    list.Add(temporary);
+                                }
+                            }
+                        }
+
+
+                    }
+                    break;
+
+                default:
+                    return false;
+
+            }
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] == destination)
+                {
+                    return true;
+                }
+ 
+            }
+
+            // remember to take into account diagnal capture
+
             return false;
         }
 
+        
+
+        private bool tryRook(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            bool result = false;
+
+
+            return result;
+        }
+
+        private bool tryBishiop(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            bool result = false;
+
+
+            return result;
+        }
+
+        private bool tryKnight(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            bool result = false;
+
+
+            return result;
+        }
+
+        private bool tryQueen(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            bool result = false;
+
+
+            return result;
+        }
+
+        private bool tryKing(ChessGame.GameLogic.Game.Locations origin, ChessGame.GameLogic.Game.Locations destination)
+        {
+            bool result = false;
+
+
+            return result;
+        }
     }
 }
