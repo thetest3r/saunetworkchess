@@ -26,6 +26,12 @@ namespace Checkmate_
         }
         public void ConnecttoServer()
         {
+            if (server != null)
+            {
+                form._form.IpBoxMessage("You are already connected");
+                return;
+            }
+                
             server = new TcpClient();
             //Needs the I.P. Address of our samuel server
             try
@@ -116,17 +122,18 @@ namespace Checkmate_
                     // 4 declares check form(4|int|bool)
                     else if (msg[0] == '4')
                     {
-                        if (msg[2] == '0')
+                        string[] message = msg.Split('|');
+                        if (message[2] == "0")
                         {
                             form._form.IpBoxMessage("White is in check!");
-
                         }
-                        else if (msg[2] == '1')
+                        else if (message[2] == "1")
                         {
                             form._form.IpBoxMessage("Black is in check!");
                         }
                         else
                             MessageBox.Show("OpCode 4 - Reply not recognized");
+                        form._form.pieceInCheck(int.Parse(message[1]));
                     }
                     // 5 player wins - 0 for white 1 for black form(5|bool)
                     else if (msg[0] == '5')

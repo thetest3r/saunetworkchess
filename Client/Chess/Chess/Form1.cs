@@ -299,7 +299,14 @@ namespace Chess
             prevClickedCell.Image = null;
             prevClickedCell = null;
             currentClickedCell = null;
+        }
 
+        public void pieceInCheck(int location)
+        {
+            int xlocation, ylocation;
+            xlocation = GetLocX((Locations)location);
+            ylocation = GetLocY((Locations)location);
+            cellDuplicate[xlocation + (ylocation * 8)].BackColor = System.Drawing.Color.Red;
         }
         public void oppenentsMove(int currentPos, int newPos)
         {

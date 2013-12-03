@@ -49,15 +49,12 @@ namespace ChessGame.Network_Logic
                             //YourEnum foo = (YourEnum)Enum.Parse(typeof(YourEnum), yourString);
                             ChessGame.GameLogic.Game.Locations origin = (ChessGame.GameLogic.Game.Locations) int.Parse(positions[1]);
                             ChessGame.GameLogic.Game.Locations newPos = (ChessGame.GameLogic.Game.Locations) int.Parse(positions[2]);
-                            bool valid = game.Move(team, origin, newPos);
-                            foreach(string i in positions)
-                            {
-                                Console.WriteLine(i);
-                            }
+                            GameLogic.Game.ResultOfMove valid = game.Move(team, origin, newPos);
+
                             //bool valid = true;
-                            if (valid)
+                            if (valid != GameLogic.Game.ResultOfMove.Failure)
                             {
-                                ReturnValidMove(_clientSocket, valid);
+                                ReturnValidMove(_clientSocket, true);
                                 if (game.Player1 == _clientSocket)
                                 {
                                     //form(3|int|int)
@@ -65,9 +62,24 @@ namespace ChessGame.Network_Logic
                                 }
                                 else
                                     OpponentsMove(game.Player1, int.Parse(positions[1]), int.Parse(positions[2]));
+
+                                if(valid == GameLogic.Game.ResultOfMove.EnemyInCheck)
+                                {
+                                    if (game.WhatTeamIsInCheck() == GameLogic.Game.Team.White)
+                                        NetworkHandler.SendCheck(game.Player1, game.Player2,(int)game.LocationOfKingInCheck(),false);
+                                    else if (game.WhatTeamIsInCheck() == GameLogic.Game.Team.Black)
+                                        NetworkHandler.SendCheck(game.Player1, game.Player2, (int)game.LocationOfKingInCheck(), true);
+                                }
+                                else if(valid == GameLogic.Game.ResultOfMove.Checkmate)
+                                {
+                                    if (game.WhatTeamIsInCheck() == GameLogic.Game.Team.White)
+                                        NetworkHandler.PlayerWins(game.Player1, game.Player2, false);
+                                    else if (game.WhatTeamIsInCheck() == GameLogic.Game.Team.Black)
+                                        NetworkHandler.PlayerWins(game.Player1, game.Player2, true);
+                                }
                             }
                             else
-                                ReturnValidMove(_clientSocket, valid);
+                                ReturnValidMove(_clientSocket, false);
                         }//Opcode 1 is for making a move
                         else if (dataFromClient[0] == '1')
                         {
