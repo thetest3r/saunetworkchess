@@ -19,6 +19,7 @@ namespace Chess
         public String protocolName;
         private static Cell[] cellDuplicate = new Cell[64];
         public CheckmateClient parentClient = null;
+        private int kingLocation;
 
         class Cell : PictureBox
         {
@@ -303,9 +304,17 @@ namespace Chess
 
         public void pieceInCheck(int location)
         {
+            kingLocation = location;
             int xlocation, ylocation;
             xlocation = GetLocX((Locations)location);
             ylocation = GetLocY((Locations)location);
+            cellDuplicate[xlocation + (ylocation * 8)].BackColor = System.Drawing.Color.Red;
+        }
+        public void unCheck()
+        {
+            int xlocation, ylocation;
+            xlocation = GetLocX((Locations)kingLocation);
+            ylocation = GetLocY((Locations)kingLocation);
             cellDuplicate[xlocation + (ylocation * 8)].BackColor = System.Drawing.Color.Red;
         }
         public void oppenentsMove(int currentPos, int newPos)

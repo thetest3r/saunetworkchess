@@ -27,8 +27,9 @@ namespace Checkmate_
         }
         public void ConnecttoServer()
         {
-            if (server != null)
+            if (server != null )
             {
+                if(!server.Connected)
                 form._form.IpBoxMessage("You are already connected");
                 return;
             }
@@ -67,6 +68,8 @@ namespace Checkmate_
             byte[] bytes = Encoding.ASCII.GetBytes(data1);
             stream.Write(bytes, 0, bytes.Length);
             stream.Flush();
+            if (inCheck == true)
+                return;
         }
         public void ExitApplication()
         {
@@ -104,6 +107,11 @@ namespace Checkmate_
                         {
                             form._form.IpBoxMessage("Move Accepted");
                             form._form.validMove();
+                            if (inCheck)
+                            {
+                                form._form.unCheck();
+                                inCheck = false;
+                            }
                         }
                         else
                             MessageBox.Show("OpCode 2 - Reply not recognized");
@@ -129,6 +137,7 @@ namespace Checkmate_
                         else
                             MessageBox.Show("OpCode 4 - Reply not recognized");
                         form._form.pieceInCheck(int.Parse(message[1]));
+                        inCheck = true;
                     }
                     // 5 player wins - 0 for white 1 for black form(5|bool)
                     else if (msg[0] == '5')
@@ -165,7 +174,7 @@ namespace Checkmate_
                             form._form.IpBoxMessage("The game has begun. You are black. It's your turn.");
                         }
                         else
-                            MessageBox.Show("OpCode 2 - Reply not recognized");
+                            MessageBox.Show("OpCode 7 - Reply not recognized");
                     }
                 }
             }
