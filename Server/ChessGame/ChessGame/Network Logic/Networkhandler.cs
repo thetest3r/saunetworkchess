@@ -8,7 +8,8 @@ using System.Text;
 namespace ChessGame.Network_Logic
 {
     /*
-     * The Networkhandler handles all incoming clients and games. It provides methods.
+     * The Networkhandler handles all incoming clients and games. It provides methods to send information about the game to each of the players
+     * in the game.
      *
      * 
      * 
@@ -18,7 +19,7 @@ namespace ChessGame.Network_Logic
     {
         public static List<HandleClient> ClientList = new List<HandleClient>();
         public static TcpListener serverSocket;
-        int numClients = 1;
+        public static int numClients = 0;
         public static void startListening()
         {
             GameManager.GameManager gameManager = GameManager.GameManager.Instance;
@@ -33,16 +34,17 @@ namespace ChessGame.Network_Logic
                 ClientList.Add(new HandleClient());
                 Console.WriteLine("player" + i.ToString() + " joined the lobby.");
                 var client = new HandleClient();
-                ClientList[i - 1].AssaignClient(clientSocket, "player" + i.ToString());
-                ClientList[i - 1].StartClient();
-                if (i % 2 == 0)
+                ClientList[numClients].AssaignClient(clientSocket, "player" + i.ToString());
+                ClientList[numClients].StartClient();
+                if (numClients % 2 == 1 && numClients != 0)
                 {
-                    gameManager.AddGame(new GameLogic.Game(ClientList.ElementAt(i - 2).getClient(), ClientList.ElementAt(i - 1).getClient(), i));
+                    gameManager.AddGame(new GameLogic.Game(ClientList.ElementAt(numClients - 1).getClient(), ClientList.ElementAt(numClients).getClient(), numClients));
                     ChessGame.GameLogic.Game g = gameManager.GetLastItem();
-                    ClientList.ElementAt(i - 2).AssaignGame(ref g, ChessGame.GameLogic.Game.Team.White);
-                    ClientList.ElementAt(i - 1).AssaignGame(ref g, ChessGame.GameLogic.Game.Team.Black);
-                    beginGame(ClientList.ElementAt(i - 2).getClient(), ClientList.ElementAt(i - 1).getClient());
+                    ClientList.ElementAt(numClients - 1).AssaignGame(ref g, ChessGame.GameLogic.Game.Team.White);
+                    ClientList.ElementAt(numClients).AssaignGame(ref g, ChessGame.GameLogic.Game.Team.Black);
+                    beginGame(ClientList.ElementAt(numClients - 1).getClient(), ClientList.ElementAt(numClients).getClient());
                 }
+                numClients++;
                 i++;
             }
         }
@@ -56,6 +58,21 @@ namespace ChessGame.Network_Logic
         {
             GameManager.GameManager gameManager = GameManager.GameManager.Instance;
             gameManager.RemoveGame(id);
+        }
+        public static void RemoveClient(TcpClient clientToRemove)
+        {
+            foreach(HandleClient clients in ClientList)
+            {
+                if(clients.getClient() == clientToRemove)
+                {
+                    ClientList.Remove(clients);
+                    return;
+                }
+            }
+            foreach(HandleClient clients in ClientList)
+            {
+                Console.WriteLine(clients.getClientNumber());
+            }
         }
 
         public static void beginGame(TcpClient client1, TcpClient client2)
@@ -99,7 +116,7 @@ namespace ChessGame.Network_Logic
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine("Exception caught in SendMessage");
                 return;
             }
 
@@ -116,7 +133,7 @@ namespace ChessGame.Network_Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine("Exception caught in RecieveString");
                 return null;
             }
             return null;

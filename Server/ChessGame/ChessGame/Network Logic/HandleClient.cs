@@ -15,6 +15,10 @@ namespace ChessGame.Network_Logic
         {
             return _clientSocket;
         }
+        public string getClientNumber()
+        {
+            return _clientNumber;
+        }
         public void AssaignClient(TcpClient clientSocket, string clientNumber)
         {
             _clientNumber = clientNumber;
@@ -90,12 +94,20 @@ namespace ChessGame.Network_Logic
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.ToString());
+                        //Console.WriteLine(ex.ToString());
                         if (_clientSocket.Connected == false)
                         {
                             Console.WriteLine("removing client");
-                            NetworkHandler.removeGame(game.Id);
-                            NetworkHandler.endGame(game.Player1, game.Player2);
+                            if(game != null)
+                            {
+                                NetworkHandler.removeGame(game.Id);
+                                NetworkHandler.endGame(game.Player1, game.Player2);
+                                
+                            }
+                            NetworkHandler.RemoveClient(_clientSocket);
+                            Console.WriteLine(NetworkHandler.numClients);
+                            NetworkHandler.numClients--;
+                            Console.WriteLine(NetworkHandler.numClients);
                             return;
                         }
 
