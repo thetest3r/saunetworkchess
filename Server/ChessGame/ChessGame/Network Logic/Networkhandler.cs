@@ -108,6 +108,7 @@ namespace ChessGame.Network_Logic
         {
             try
             {
+                Console.WriteLine(msg);
                 var broadcastSocket = clientSocket;
                 NetworkStream broadcastStream = broadcastSocket.GetStream();
                 byte[] broadcastBytes = Encoding.ASCII.GetBytes(msg);

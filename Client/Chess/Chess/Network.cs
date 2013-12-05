@@ -129,15 +129,16 @@ namespace Checkmate_
                     else if (msg[0] == '4')
                     {
                         string[] message = msg.Split('|');
+                        string boo = message[2];
                         foreach(string i in message)
                         {
                             form._form.IpBoxMessage(i);
                         }
-                        if (message[2] == "0")
+                        if (boo[0] == '0')
                         {
                             form._form.IpBoxMessage("White is in check!");
                         }
-                        else if (message[2] == "1")
+                        else if (boo[0] == '1')
                         {
                             form._form.IpBoxMessage("Black is in check!");
                         }

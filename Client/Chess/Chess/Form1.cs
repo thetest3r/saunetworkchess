@@ -317,7 +317,7 @@ namespace Chess
             int xlocation, ylocation;
             xlocation = GetLocX((Locations)kingLocation);
             ylocation = GetLocY((Locations)kingLocation);
-            if(kingLocation % 2 == 0)
+            if (xlocation + (ylocation * 8) % 2 == 0)
                 cellDuplicate[xlocation + (ylocation * 8)].BackColor = System.Drawing.Color.DarkGray;
             else
                 cellDuplicate[xlocation + (ylocation * 8)].BackColor = System.Drawing.Color.Black;
