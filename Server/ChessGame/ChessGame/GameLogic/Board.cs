@@ -1250,6 +1250,9 @@ namespace ChessGame.GameLogic
                 }
             }
 
+            int x = Ox;
+            int y = Oy;
+
             while (!obsticleUpLeft)
             {
                 x--;
@@ -1276,6 +1279,9 @@ namespace ChessGame.GameLogic
                     return checkForCheckandMove(Ox, Oy, Dx, Dy);
                 }
             }
+
+            int x = Ox;
+            int y = Oy;
 
             while (!obsticleUpRight)
             {
@@ -1332,7 +1338,8 @@ namespace ChessGame.GameLogic
                 }
             }
 
-            x = Ox;
+            int x = Ox;
+            int y = Oy;
 
             while (!obsticleRight)
             {
@@ -2043,6 +2050,9 @@ namespace ChessGame.GameLogic
                 }
             }
 
+            int x = Ox;
+            int y = Oy;
+
             while (!obsticleUpLeft)
             {
                 x--;
@@ -2069,6 +2079,9 @@ namespace ChessGame.GameLogic
                     return true;
                 }
             }
+
+            int x = Ox;
+            int y = Oy;
 
             while (!obsticleUpRight)
             {
