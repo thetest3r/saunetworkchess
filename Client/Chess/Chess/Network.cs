@@ -192,6 +192,7 @@ namespace Checkmate_
                 //MessageBox.Show(ex.ToString());
                 Application.Exit();
                 return;
+
             }
         }
     }
