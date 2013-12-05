@@ -1063,6 +1063,9 @@ namespace ChessGame.GameLogic
                 }
             }
 
+            x = Ox;
+            y = Oy;
+
             while (!obsticleUpRight)
             {
                 x++;
@@ -1823,6 +1826,9 @@ namespace ChessGame.GameLogic
                 }
             }
 
+            x = Ox;
+            y = Oy;
+
             while (!obsticleUpLeft)
             {
                 x--;
@@ -1849,6 +1855,9 @@ namespace ChessGame.GameLogic
                     return true;
                 }
             }
+
+            x = Ox;
+            y = Oy;
 
             while (!obsticleUpRight)
             {
