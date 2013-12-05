@@ -41,7 +41,7 @@ namespace Checkmate_
             //Needs the I.P. Address of our samuel server
             try
             {
-                server.Connect("127.0.0.1", 1991);
+                server.Connect("216.249.119.191", 1991);
                 form._form.IpBoxMessage("Connected to Server");
             }
             catch (Exception ex)
