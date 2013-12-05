@@ -29,9 +29,12 @@ namespace Checkmate_
         {
             if (server != null )
             {
-                if(!server.Connected)
-                form._form.IpBoxMessage("You are already connected");
-                return;
+                if(server.Connected)
+                {
+                    form._form.IpBoxMessage("You are already connected");
+                    return;
+                }
+                    
             }
                 
             server = new TcpClient();
