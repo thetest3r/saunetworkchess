@@ -87,9 +87,9 @@ namespace ChessGame.Network_Logic
         {
             string send = "4|" + location.ToString() + "|";
             if (player)
-                send += "1$";
+                send += "1";
             else
-                send += "0$";
+                send += "0";
             SendMessage(client1, send);
             SendMessage(client2, send);
         }

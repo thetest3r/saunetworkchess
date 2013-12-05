@@ -317,7 +317,10 @@ namespace Chess
             int xlocation, ylocation;
             xlocation = GetLocX((Locations)kingLocation);
             ylocation = GetLocY((Locations)kingLocation);
-            cellDuplicate[xlocation + (ylocation * 8)].BackColor = System.Drawing.Color.Red;
+            if(kingLocation % 2 == 0)
+                cellDuplicate[xlocation + (ylocation * 8)].BackColor = System.Drawing.Color.DarkGray;
+            else
+                cellDuplicate[xlocation + (ylocation * 8)].BackColor = System.Drawing.Color.Black;
         }
         public void oppenentsMove(int currentPos, int newPos)
         {
