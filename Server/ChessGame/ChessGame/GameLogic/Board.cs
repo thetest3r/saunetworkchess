@@ -1478,7 +1478,31 @@ namespace ChessGame.GameLogic
             {
                 if (list[i] == destination)
                 {
-                    return checkForCheckandMove(Ox, Oy, Dx, Dy);
+                    if (team == Game.Team.Black)
+                    {
+                        BlackKingLoc = destination;
+                    }
+                    else
+                    {
+                        WhiteKingLoc = destination;
+                    }
+
+
+                    Game.ResultOfMove returnValue = checkForCheckandMove(Ox, Oy, Dx, Dy);
+
+                    if (returnValue == Game.ResultOfMove.Failure)
+                    {
+                        if (team == Game.Team.Black)
+                        {
+                            BlackKingLoc = origin;
+                        }
+                        else
+                        {
+                            WhiteKingLoc = origin;
+                        }
+                    }
+
+                    return returnValue;
                 }
             }
 
