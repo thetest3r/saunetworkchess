@@ -117,7 +117,7 @@ namespace Checkmate_
                             }
                         }
                         else
-                            MessageBox.Show("OpCode 2 - Reply not recognized");
+                            form._form.IpBoxMessage("OpCode 2 - Reply not recognized");
                     }
                     // 3 is when the other player moves form(3|int|int)
                     else if (msg[0] == '3')
@@ -138,7 +138,7 @@ namespace Checkmate_
                             form._form.IpBoxMessage("Black is in check!");
                         }
                         else
-                            MessageBox.Show("OpCode 4 - Reply not recognized");
+                            form._form.IpBoxMessage("OpCode 4 - Reply not recognized");
                         form._form.pieceInCheck(int.Parse(message[1]));
                         inCheck = true;
                     }
@@ -155,7 +155,7 @@ namespace Checkmate_
                             form._form.IpBoxMessage("Checkmate!\nBlack Wins!");
                         }
                         else
-                            MessageBox.Show("OpCode 2 - Reply not recognized");
+                            form._form.IpBoxMessage("OpCode 5 - Reply not recognized");
                     }
                     // 6 for end game form(6|)
                     else if (msg[0] == '6')
@@ -177,7 +177,7 @@ namespace Checkmate_
                             form._form.IpBoxMessage("The game has begun. You are black. It's your turn.");
                         }
                         else
-                            MessageBox.Show("OpCode 7 - Reply not recognized");
+                            form._form.IpBoxMessage("OpCode 7 - Reply not recognized");
                     }
                 }
             }
