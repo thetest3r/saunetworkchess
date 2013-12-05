@@ -1250,8 +1250,8 @@ namespace ChessGame.GameLogic
                 }
             }
 
-            int x = Ox;
-            int y = Oy;
+            x = Ox;
+            y = Oy;
 
             while (!obsticleUpLeft)
             {
@@ -1280,8 +1280,8 @@ namespace ChessGame.GameLogic
                 }
             }
 
-            int x = Ox;
-            int y = Oy;
+            x = Ox;
+            y = Oy;
 
             while (!obsticleUpRight)
             {
@@ -1338,8 +1338,8 @@ namespace ChessGame.GameLogic
                 }
             }
 
-            int x = Ox;
-            int y = Oy;
+            x = Ox;
+            y = Oy;
 
             while (!obsticleRight)
             {
@@ -2050,8 +2050,8 @@ namespace ChessGame.GameLogic
                 }
             }
 
-            int x = Ox;
-            int y = Oy;
+            x = Ox;
+            y = Oy;
 
             while (!obsticleUpLeft)
             {
@@ -2080,8 +2080,8 @@ namespace ChessGame.GameLogic
                 }
             }
 
-            int x = Ox;
-            int y = Oy;
+            x = Ox;
+            y = Oy;
 
             while (!obsticleUpRight)
             {

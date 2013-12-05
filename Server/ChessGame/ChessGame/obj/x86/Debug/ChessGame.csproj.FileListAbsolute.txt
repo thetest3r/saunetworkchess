@@ -14,3 +14,7 @@ C:\Users\Colby\Documents\Network Chess\Server\ChessGame\ChessGame\bin\Debug\Ches
 C:\Users\Colby\Documents\Network Chess\Server\ChessGame\ChessGame\bin\Debug\ChessGame.application
 C:\Users\Colby\Documents\Network Chess\Server\ChessGame\ChessGame\obj\x86\Debug\ChessGame.exe.manifest
 C:\Users\Colby\Documents\Network Chess\Server\ChessGame\ChessGame\obj\x86\Debug\ChessGame.application
+C:\Code\Network Project\Server\ChessGame\ChessGame\bin\Debug\ChessGame.exe.manifest
+C:\Code\Network Project\Server\ChessGame\ChessGame\bin\Debug\ChessGame.application
+C:\Code\Network Project\Server\ChessGame\ChessGame\obj\x86\Debug\ChessGame.exe.manifest
+C:\Code\Network Project\Server\ChessGame\ChessGame\obj\x86\Debug\ChessGame.application
