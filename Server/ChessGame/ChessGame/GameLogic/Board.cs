@@ -1033,6 +1033,9 @@ namespace ChessGame.GameLogic
                 }
             }
 
+            x = Ox;
+            y = Oy;
+
             while (!obsticleUpLeft)
             {
                 x--;

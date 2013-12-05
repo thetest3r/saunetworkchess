@@ -30,7 +30,7 @@ namespace ChessGame.GameLogic
             this.Player2 = Player2;
             Id = identification;
             board = new Board();
-            WaitingForThisColorToMove = Team.Black;
+            WaitingForThisColorToMove = Team.White;
         }
 
         void Reset()
