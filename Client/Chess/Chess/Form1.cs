@@ -290,6 +290,8 @@ namespace Chess
         public void IpBoxMessage(string msg)
         {
             listBox1.Items.Add(msg);
+            listBox1.SelectedIndex = listBox1.Items.Count - 1;
+            listBox1.Focus();
             //IPAddrBox.Text = msg;
             return;
         }
@@ -716,6 +718,11 @@ namespace Chess
         {
             prevClickedCell = null;
             currentClickedCell = null;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
     }
