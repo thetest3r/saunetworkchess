@@ -225,7 +225,7 @@ namespace Chess
             //    prevClickedCell = (Cell)sender;
             //System.Diagnostics.Debug.WriteLine("Click: " + cell);
             string i = sender.ToString();
-            IPAddrBox.Text = "Hello World" + i;
+            //IPAddrBox.Text = "Hello World" + i;
             //parentClient.SendtoServer(i);
             //Reference to update picture inside picture box http://stackoverflow.com/questions/9030622/how-to-refresh-picturebox
         }
