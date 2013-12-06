@@ -43,6 +43,7 @@ namespace Checkmate_
             {
                 server.Connect("216.249.119.191", 1991);
                 form._form.IpBoxMessage("Connected to Server");
+                form._form.IpBoxMessage("Waiting for other player");
             }
             catch (Exception ex)
             {
@@ -124,6 +125,7 @@ namespace Checkmate_
                     {
                         string[] positions = msg.Split('|');
                         form._form.oppenentsMove(int.Parse(positions[1]), int.Parse(positions[2]));
+                        form._form.IpBoxMessage("It is your turn");
                     }
                     // 4 declares check form(4|int|bool)
                     else if (msg[0] == '4')
